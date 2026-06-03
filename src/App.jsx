@@ -50,7 +50,10 @@ function App() {
             />
             <Route path="/insulation" element={<InsulationPage />} />
             <Route path="/heating" element={<HeatingPage />} />
-            <Route path="/check-answers" element={<CheckAnswersPage />} />
+            <Route
+              path="/check-answers"
+              element={<CheckAnswersPage formData={formData} />}
+            />
             <Route path="/result" element={<ResultPage />} />
             <Route path="/accessibility-statement" element={<AccessibilityStatementPage />} />
           </Routes>
