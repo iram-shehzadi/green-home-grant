@@ -7,17 +7,28 @@ import os from 'node:os';
 // Default to 5002; override via VITE_PORT and VITE_PUBLIC_HOSTNAME.
 const PORT = Number(process.env.VITE_PORT) || 5002;
 const HOSTNAME = process.env.VITE_PUBLIC_HOSTNAME || os.hostname();
+const BASE = `/proxy/${PORT}/`;
+
+const reAddBasePrefix = {
+  name: 'readd-base-prefix',
+  configureServer(server) {
+    server.middlewares.use((req, _res, next) => {
+      if (req.url && !req.url.startsWith(BASE)) {
+        req.url = BASE.replace(/\/$/, '') + req.url;
+      }
+      next();
+    });
+  },
+};
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), reAddBasePrefix],
+  base: BASE,
   server: {
     host: '0.0.0.0',
     port: PORT,
     strictPort: true,
-    hmr: {
-      protocol: 'wss',
-      host: HOSTNAME,
-      clientPort: 443,
-    },
+    allowedHosts: [HOSTNAME, '.labs.decoded.com'],
+    hmr: false,
   },
 });
