@@ -1,17 +1,28 @@
-// TODO: Import useNavigate from react-router-dom
+import QuestionPage from '../components/QuestionPage';
 
-function InsulationPage() {
-  // TODO: Read current value from form state
-  // TODO: Add validation and error handling
-  // TODO: On "Continue", save answer and navigate to /heating
+const FIELD = 'insulation';
 
+const OPTIONS = [
+  { value: 'both', label: 'Yes, both wall and loft insulation' },
+  { value: 'wall', label: 'Yes, wall insulation only' },
+  { value: 'loft', label: 'Yes, loft insulation only' },
+  { value: 'none', label: 'No insulation' },
+  { divider: 'or' },
+  { value: 'dont-know', label: 'I do not know' },
+];
+
+function InsulationPage({ formData, updateField }) {
   return (
-    <>
-      <a href="/income" className="govuk-back-link">Back</a>
-      <h1 className="govuk-heading-l">Does your property have wall or loft insulation?</h1>
-      {/* TODO: Add radio buttons for: Yes - both wall and loft, Yes - wall only, Yes - loft only, No insulation, I do not know */}
-      {/* TODO: Add a Continue button */}
-    </>
+    <QuestionPage
+      question="Does your property have wall or loft insulation?"
+      fieldName={FIELD}
+      options={OPTIONS}
+      value={formData[FIELD]}
+      onChange={(value) => updateField(FIELD, value)}
+      backPath="/income"
+      nextPath="/heating"
+      errorMessage="Select whether your property has wall or loft insulation"
+    />
   );
 }
 

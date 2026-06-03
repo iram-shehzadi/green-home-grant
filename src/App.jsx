@@ -48,7 +48,12 @@ function App() {
                 <IncomePage formData={formData} updateField={updateField} />
               }
             />
-            <Route path="/insulation" element={<InsulationPage />} />
+            <Route
+              path="/insulation"
+              element={
+                <InsulationPage formData={formData} updateField={updateField} />
+              }
+            />
             <Route path="/heating" element={<HeatingPage />} />
             <Route path="/check-answers" element={<CheckAnswersPage />} />
             <Route path="/result" element={<ResultPage />} />
