@@ -59,7 +59,12 @@ function App() {
                 <InsulationPage formData={formData} updateField={updateField} />
               }
             />
-            <Route path="/heating" element={<HeatingPage />} />
+            <Route
+              path="/heating"
+              element={
+                <HeatingPage formData={formData} updateField={updateField} />
+              }
+            />
             <Route path="/check-answers" element={<CheckAnswersPage />} />
             <Route path="/result" element={<ResultPage />} />
             <Route path="/accessibility-statement" element={<AccessibilityStatementPage />} />

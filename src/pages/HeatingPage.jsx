@@ -1,17 +1,28 @@
-// TODO: Import useNavigate from react-router-dom
+import QuestionPage from '../components/QuestionPage';
 
-function HeatingPage() {
-  // TODO: Read current value from form state
-  // TODO: Add validation and error handling
-  // TODO: On "Continue", save answer and navigate to /check-answers
+const FIELD = 'heating';
 
+// Values must match the answer vocabulary in CLAUDE.md (used by eligibility.js).
+const OPTIONS = [
+  { value: 'gas', label: 'Gas boiler' },
+  { value: 'oil', label: 'Oil boiler' },
+  { value: 'electric', label: 'Electric heating' },
+  { value: 'heat-pump', label: 'Heat pump' },
+  { value: 'other', label: 'Other' },
+];
+
+function HeatingPage({ formData, updateField }) {
   return (
-    <>
-      <a href="/insulation" className="govuk-back-link">Back</a>
-      <h1 className="govuk-heading-l">What is your main heating system?</h1>
-      {/* TODO: Add radio buttons for: Gas boiler, Oil boiler, Electric heating, Heat pump, Other */}
-      {/* TODO: Add a Continue button */}
-    </>
+    <QuestionPage
+      question="What is your main heating system?"
+      fieldName={FIELD}
+      options={OPTIONS}
+      value={formData[FIELD]}
+      onChange={(value) => updateField(FIELD, value)}
+      backPath="/insulation"
+      nextPath="/check-answers"
+      errorMessage="Select your main heating system"
+    />
   );
 }
 
