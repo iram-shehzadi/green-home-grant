@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import GovukHeader from './components/GovukHeader';
+import GovukFooter from './components/GovukFooter';
 // TODO: Mount PhaseBanner below GovukHeader — import PhaseBanner from './components/PhaseBanner';
-// TODO: Mount GovukFooter after the closing </main> — import GovukFooter from './components/GovukFooter';
 import StartPage from './pages/StartPage';
 import PropertyTypePage from './pages/PropertyTypePage';
 import OwnershipPage from './pages/OwnershipPage';
@@ -71,7 +71,7 @@ function App() {
           </Routes>
         </main>
       </div>
-      {/* TODO: Add <GovukFooter /> here */}
+      <GovukFooter />
     </>
   );
 }
