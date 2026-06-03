@@ -16,7 +16,6 @@
     --light-grey: #f3f2f1;
     --mid-grey: #b1b4b6;
     --dark-grey: #505a5f;
-    --purple: #4c2c92;
     --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     --s1: 5px; --s2: 10px; --s3: 15px; --s4: 20px; --s5: 30px; --s6: 40px; --s7: 60px;
   }
@@ -30,86 +29,66 @@
     line-height: 1.5;
     font-size: 19px;
   }
-  /* Skip link */
-  .skip-link {
-    position: absolute; left: -9999px; top: 0;
-    background: var(--yellow); color: var(--black);
-    padding: var(--s2) var(--s3); font-weight: 700; z-index: 100;
-  }
+  .skip-link { position: absolute; left: -9999px; top: 0; background: var(--yellow); color: var(--black); padding: var(--s2) var(--s3); font-weight: 700; z-index: 100; }
   .skip-link:focus { left: 0; outline: 3px solid var(--black); }
 
-  /* Focus — visible everywhere */
   a:focus, button:focus, input:focus, select:focus, summary:focus, [tabindex]:focus {
-    outline: 3px solid var(--yellow);
-    outline-offset: 0;
+    outline: 3px solid var(--yellow); outline-offset: 0;
     box-shadow: 0 -2px var(--yellow), 0 4px var(--black);
-    background-color: var(--yellow);
-    color: var(--black);
-    text-decoration: none;
+    background-color: var(--yellow); color: var(--black); text-decoration: none;
   }
   select:focus, input:focus { box-shadow: inset 0 0 0 2px var(--black); background-color: var(--white); }
 
-  /* Masthead */
-  header.masthead {
-    background: var(--black);
-    color: var(--white);
-    border-bottom: 10px solid var(--blue);
-    padding: var(--s4) 0;
-  }
+  header.masthead { background: var(--black); color: var(--white); border-bottom: 10px solid var(--blue); padding: var(--s4) 0; }
   .container { max-width: 1020px; margin: 0 auto; padding: 0 var(--s3); }
-  .masthead .tag {
-    display: inline-block; background: var(--blue); color: var(--white);
-    font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
-    padding: 4px 10px; border-radius: 3px; margin-bottom: var(--s2);
-  }
+  .masthead .tag { display: inline-block; background: var(--blue); color: var(--white); font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 4px 10px; border-radius: 3px; margin-bottom: var(--s2); }
   .masthead h1 { font-size: clamp(32px, 6vw, 53px); line-height: 1.05; margin: 0 0 var(--s2); font-weight: 700; }
-  .masthead p { font-size: clamp(18px, 3vw, 24px); margin: 0; color: #dfe3e6; max-width: 40ch; }
+  .masthead p { font-size: clamp(18px, 3vw, 24px); margin: 0; color: #dfe3e6; max-width: 44ch; }
 
-  /* Layout */
   main { padding: var(--s6) 0 var(--s7); }
   section { margin-bottom: var(--s7); scroll-margin-top: var(--s4); }
   h2 { font-size: clamp(27px, 4vw, 36px); font-weight: 700; line-height: 1.1; margin: 0 0 var(--s2); padding-bottom: var(--s2); border-bottom: 2px solid var(--blue); }
   h3 { font-size: clamp(21px, 3vw, 24px); font-weight: 700; margin: var(--s5) 0 var(--s2); }
   h4 { font-size: 19px; font-weight: 700; margin: var(--s3) 0 var(--s1); }
   p, li { font-size: 19px; }
-  .lead { font-size: 22px; color: var(--dark-grey); max-width: 60ch; }
+  .lead { font-size: 22px; color: var(--dark-grey); max-width: 62ch; }
   a { color: var(--blue); }
   a:hover { color: var(--blue-dark); }
   code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace; background: var(--light-grey); padding: 1px 5px; border-radius: 3px; font-size: 0.92em; }
-  pre { background: var(--black); color: #e8f0ff; padding: var(--s4); border-radius: 6px; overflow-x: auto; font-size: 15px; line-height: 1.5; }
+  pre { background: #1b1b2f; color: #e8f0ff; padding: var(--s4); border-radius: 6px; overflow-x: auto; font-size: 14px; line-height: 1.55; }
   pre code { background: none; color: inherit; padding: 0; }
 
-  /* Section number badge */
   .secnum { display:inline-flex; align-items:center; justify-content:center; width: 34px; height: 34px; border-radius: 50%; background: var(--blue); color: var(--white); font-size: 18px; font-weight: 700; margin-right: var(--s2); vertical-align: middle; }
 
-  /* Nav rail */
   nav.toc { background: var(--light-grey); border-left: 5px solid var(--blue); padding: var(--s3) var(--s4); margin-bottom: var(--s6); }
   nav.toc strong { display:block; margin-bottom: var(--s2); font-size: 16px; text-transform: uppercase; letter-spacing: .5px; color: var(--dark-grey); }
   nav.toc ol { margin: 0; padding-left: var(--s4); columns: 2; column-gap: var(--s5); }
   nav.toc li { margin-bottom: 4px; break-inside: avoid; }
 
-  /* Cards / grid */
   .grid { display: grid; gap: var(--s4); }
   .grid-2 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
-  .grid-3 { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
   .card { background: var(--white); border: 1px solid var(--mid-grey); border-radius: 8px; padding: var(--s4); }
   .card h4 { margin-top: 0; }
   .card.accent { border-top: 5px solid var(--blue); }
   .card .src { font-size: 15px; }
 
-  /* Callouts */
   .callout { padding: var(--s3) var(--s4); border-radius: 6px; margin: var(--s4) 0; }
   .callout.info { background: #e8f1f8; border-left: 5px solid var(--blue); }
   .callout.warn { background: #fef7e0; border-left: 5px solid #f47738; }
   .callout.good { background: #e9f3ec; border-left: 5px solid var(--green); }
   .callout strong { font-weight: 700; }
 
-  /* MVP checklist */
+  /* Plain-language glossary */
+  details.gloss { border: 1px solid var(--mid-grey); border-radius: 6px; padding: var(--s2) var(--s3); margin: var(--s4) 0; background: #fbfbfb; }
+  details.gloss summary { font-weight: 700; cursor: pointer; font-size: 18px; }
+  details.gloss dl { margin: var(--s3) 0 var(--s1); }
+  details.gloss dt { font-weight: 700; margin-top: var(--s2); }
+  details.gloss dd { margin: 0 0 var(--s1); color: var(--dark-grey); }
+
   .mvp { list-style: none; padding: 0; margin: 0; }
   .mvp li { display: flex; align-items: flex-start; gap: var(--s2); padding: var(--s2) 0; border-bottom: 1px solid var(--light-grey); }
   .mvp .badge { flex: 0 0 auto; background: var(--green); color: #fff; font-size: 13px; font-weight: 700; padding: 2px 8px; border-radius: 3px; margin-top: 2px; white-space: nowrap; }
 
-  /* Tables */
   table { width: 100%; border-collapse: collapse; margin: var(--s3) 0; }
   th, td { text-align: left; padding: var(--s2) var(--s3); border-bottom: 1px solid var(--mid-grey); font-size: 17px; vertical-align: top; }
   th { border-bottom: 2px solid var(--black); }
@@ -118,35 +97,46 @@
   .pill.part { background: #f47738; }
   .pill.no { background: var(--red); }
 
-  /* Form controls */
   label.fld { display:block; font-weight: 700; margin-bottom: var(--s1); }
   input[type=text] { font-family: var(--font); font-size: 18px; padding: 8px 10px; border: 2px solid var(--black); border-radius: 0; width: 100%; max-width: 320px; }
   select { font-family: var(--font); font-size: 18px; padding: 7px 8px; border: 2px solid var(--black); border-radius: 0; background: var(--white); min-width: 160px; }
-  .strategy-opt { border: 2px solid var(--mid-grey); border-radius: 6px; padding: var(--s3) var(--s4); margin-bottom: var(--s3); cursor: pointer; display:block; }
-  .strategy-opt:hover { border-color: var(--blue); }
-  .strategy-opt input { margin-right: var(--s2); transform: scale(1.4); accent-color: var(--blue); }
-  .strategy-opt.selected { border-color: var(--blue); border-width: 4px; padding: calc(var(--s3) - 2px) calc(var(--s4) - 2px); background: #f5f9fc; }
-  .strategy-opt .name { font-weight: 700; font-size: 20px; }
-  .strategy-opt .pros { font-size: 16px; color: var(--dark-grey); margin: var(--s1) 0 0; }
+
+  /* Decision / choice options */
+  .opt { border: 2px solid var(--mid-grey); border-radius: 6px; padding: var(--s3) var(--s4); margin-bottom: var(--s3); cursor: pointer; display:block; }
+  .opt:hover { border-color: var(--blue); }
+  .opt input { margin-right: var(--s2); transform: scale(1.4); accent-color: var(--blue); }
+  .opt.selected { border-color: var(--blue); border-width: 4px; padding: calc(var(--s3) - 2px) calc(var(--s4) - 2px); background: #f5f9fc; }
+  .opt .name { font-weight: 700; font-size: 20px; }
+  .opt .why { font-size: 16px; color: var(--dark-grey); margin: var(--s1) 0 0; }
+  .opt .verdict { font-size: 15px; margin-top: var(--s1); }
+  .opt .verdict .up { color: var(--green); font-weight: 700; }
+  .opt .verdict .down { color: var(--red); font-weight: 700; }
+
   .chk { display:flex; align-items:flex-start; gap: var(--s2); padding: var(--s2); border:1px solid var(--mid-grey); border-radius:4px; margin-bottom: var(--s2); }
   .chk input { transform: scale(1.4); accent-color: var(--blue); margin-top: 4px; }
   .chk label { font-weight: 400; }
   .chk .gname { font-weight: 700; }
 
-  /* Task board */
   .task-row { display: grid; grid-template-columns: 1fr 170px 70px; gap: var(--s2); align-items: center; padding: var(--s2) 0; border-bottom: 1px solid var(--light-grey); }
   .task-row .tlabel { font-size: 17px; }
   .workstream-head { font-weight:700; background: var(--light-grey); padding: var(--s2) var(--s3); margin-top: var(--s3); border-radius: 4px; }
 
-  /* Buttons */
-  .btn { font-family: var(--font); font-size: 19px; font-weight: 700; color: #fff; background: var(--green); border: 2px solid transparent; box-shadow: 0 2px 0 #002d18; padding: 10px 18px; border-radius: 4px; cursor: pointer; }
+  /* Slice diagram */
+  .slice { display:flex; align-items:center; flex-wrap:wrap; gap: var(--s2); margin: var(--s4) 0; }
+  .slice .node { background: var(--white); border: 2px solid var(--blue); border-radius: 6px; padding: var(--s2) var(--s3); font-weight:700; font-size: 16px; }
+  .slice .node.live { background: var(--blue); color:#fff; }
+  .slice .node.stub { border-style: dashed; color: var(--dark-grey); }
+  .slice .arrow { color: var(--blue); font-weight: 700; font-size: 22px; }
+
+  .btn { font-family: var(--font); font-size: 18px; font-weight: 700; color: #fff; background: var(--green); border: 2px solid transparent; box-shadow: 0 2px 0 #002d18; padding: 9px 16px; border-radius: 4px; cursor: pointer; }
   .btn:hover { background: #005a30; }
-  .btn:active { top: 2px; box-shadow: none; }
   .btn.secondary { background: var(--white); color: var(--blue); border-color: var(--blue); box-shadow: 0 2px 0 var(--blue-dark); }
   .btn.secondary:hover { background: var(--light-grey); }
 
-  textarea#jsonOut { width: 100%; min-height: 320px; font-family: "SFMono-Regular", Consolas, monospace; font-size: 14px; padding: var(--s3); border: 2px solid var(--black); border-radius: 6px; background: #1b1b2f; color: #d7e3ff; }
+  .copywrap { position: relative; }
+  .copywrap .copybtn { position: absolute; top: var(--s2); right: var(--s2); font-size: 14px; padding: 5px 10px; }
 
+  textarea#jsonOut { width: 100%; min-height: 340px; font-family: "SFMono-Regular", Consolas, monospace; font-size: 14px; padding: var(--s3); border: 2px solid var(--black); border-radius: 6px; background: #1b1b2f; color: #d7e3ff; }
   .toolbar { display:flex; gap: var(--s2); flex-wrap: wrap; align-items:center; margin: var(--s3) 0; }
   .status { font-size: 16px; color: var(--green); font-weight: 700; }
 
@@ -156,6 +146,7 @@
     nav.toc ol { columns: 1; }
     .task-row { grid-template-columns: 1fr; gap: 4px; }
     .masthead h1 { font-size: 32px; }
+    .copywrap .copybtn { position: static; display:block; margin-bottom: var(--s2); }
   }
   @media print { .no-print { display:none; } pre, .card { break-inside: avoid; } }
 </style>
@@ -167,7 +158,7 @@
   <div class="container">
     <span class="tag">Hackathon Mission Control</span>
     <h1>Green Home Grant — Plan to Win</h1>
-    <p>A 2-day, 4-person playbook for shipping a GOV.UK-standard eligibility service. Read it, divide the work, export your decisions.</p>
+    <p>Our chosen approach: build one working slice together, lock the rules in a CLAUDE.md, then split into features. Read it, decide the first page, export your decisions.</p>
   </div>
 </header>
 
@@ -177,12 +168,14 @@
     <strong>On this page</strong>
     <ol>
       <li><a href="#overview">Overview &amp; MVP floor</a></li>
+      <li><a href="#approach">Our approach (plain English)</a></li>
+      <li><a href="#firstpage">Decide: which page first?</a></li>
+      <li><a href="#claudemd">Mob session → CLAUDE.md</a></li>
       <li><a href="#architecture">Architecture decisions</a></li>
       <li><a href="#patterns">GOV.UK pattern reference</a></li>
       <li><a href="#eligibility">Eligibility ruleset</a></li>
       <li><a href="#team">Your team</a></li>
-      <li><a href="#strategy">Work-division strategy</a></li>
-      <li><a href="#tasks">Task board</a></li>
+      <li><a href="#tasks">Feature split &amp; task board</a></li>
       <li><a href="#stretch">Stretch goals</a></li>
       <li><a href="#ailog">AI_LOG plan</a></li>
       <li><a href="#export">Generate JSON</a></li>
@@ -205,77 +198,327 @@
     </ul>
   </section>
 
-  <!-- 2. ARCHITECTURE -->
+  <!-- 2. APPROACH -->
+  <section id="approach">
+    <h2><span class="secnum" aria-hidden="true">2</span>Our approach, in plain English</h2>
+    <p>We chose <strong>“Vertical slice, then feature ownership.”</strong> Here is what that actually means, step by step:</p>
+    <ol>
+      <li><strong>All four of us sit together for ~1 hour</strong> and build one thin path through the app: the start page → <em>one</em> question page → a results page with a fake (hardcoded) answer. We are not trying to finish the app — we are trying to agree <em>how</em> a page is built.</li>
+      <li><strong>We write down the rules we just discovered into a file called <code>CLAUDE.md</code></strong> (how answers are stored, how pages talk to each other, which CSS classes to use, how errors look). This file is our shared rulebook.</li>
+      <li><strong>Then we split up.</strong> Each person owns one area (Flow, Logic, Review, Quality) and builds independently — but because we all follow the same <code>CLAUDE.md</code>, our work fits together with no surprises.</li>
+    </ol>
+    <div class="callout good"><strong>Why this beats “everyone grabs a page and goes”:</strong> the single biggest reason hackathon apps break is that people store answers differently and the data gets lost between pages. Building one slice together first means we only solve that problem <em>once</em>, together, before anyone works alone.</div>
+
+    <details class="gloss">
+      <summary>Plain-language glossary (open me if any term is unfamiliar)</summary>
+      <dl>
+        <dt>Vertical slice</dt><dd>A thin end-to-end path through the app — start to finish — that proves the plumbing works, even if most features are missing or faked.</dd>
+        <dt>State / form data</dt><dd>The answers the user has given so far, kept in memory as the user moves between pages. We keep all of it in one object so nothing gets lost.</dd>
+        <dt>“Locking the state shape”</dt><dd>Agreeing the exact names and structure of where answers are stored (e.g. the key is <code>propertyType</code>, the value is a string like <code>"house"</code>) so everyone reads and writes it the same way.</dd>
+        <dt>Component / page</dt><dd>A reusable piece of screen, written in React. Each question is its own page component.</dd>
+        <dt>Props</dt><dd>How a parent page passes data and functions down to a child page (e.g. passing the current answers and a “save this answer” function).</dd>
+        <dt>Pure function</dt><dd>A function that takes inputs and returns an output with no side effects — easy to test. Our eligibility logic is one of these.</dd>
+        <dt>CLAUDE.md</dt><dd>A plain-text rulebook in the project that both we and Claude read, so AI-assisted code follows our conventions automatically.</dd>
+      </dl>
+    </details>
+  </section>
+
+  <!-- 3. FIRST PAGE DECISION -->
+  <section id="firstpage">
+    <h2><span class="secnum" aria-hidden="true">3</span>Decision: which page do we build first, together?</h2>
+    <p class="lead">In the mob hour we build <strong>one</strong> question page very carefully. It becomes the template every other question page is copied from. So we want to pick the page that teaches us the most reusable pattern with the least fuss.</p>
+
+    <p>Here is the slice we are aiming for — only the middle box changes depending on our choice:</p>
+    <div class="slice" aria-hidden="true">
+      <span class="node live">Start page</span>
+      <span class="arrow">→</span>
+      <span class="node live" id="sliceMiddle">Property type</span>
+      <span class="arrow">→</span>
+      <span class="node stub">Result (faked)</span>
+    </div>
+
+    <p>Pick the one we will build first. <strong>Our recommendation is A</strong> — it is the simplest, comes first in the journey, and is the closest match to the other four questions.</p>
+
+    <fieldset style="border:0;padding:0;margin:0;">
+      <legend class="vh">Choose the first page to build together</legend>
+
+      <label class="opt" data-firstpage="property-type">
+        <input type="radio" name="firstpage" value="property-type">
+        <span class="name">A · Property type — Recommended</span>
+        <p class="why"><strong>What it is:</strong> a single list of radio buttons (House, Bungalow, Flat, Maisonette, Other). It is the very first question users answer.</p>
+        <p class="why"><strong>Why first:</strong> it is the simplest possible question page, so we spend our hour on the <em>pattern</em>, not on tricky content. The other four questions are almost identical — once this one is right, they become copy-paste-and-rename jobs. The slice (Start → Property type → Result) is also the natural beginning of the real journey.</p>
+        <p class="verdict"><span class="up">Best for</span> a mixed-experience team — least to get wrong. <span class="down">Watch out</span> — remember to also sketch how Check-answers will read the data, so the shape covers all 5 questions.</p>
+      </label>
+
+      <label class="opt" data-firstpage="insulation">
+        <input type="radio" name="firstpage" value="insulation">
+        <span class="name">B · Insulation question</span>
+        <p class="why"><strong>What it is:</strong> the richest question — 5 options including an honest “I do not know”.</p>
+        <p class="why"><strong>Why consider it:</strong> building it surfaces two patterns the others do not: offering an “I do not know” option, and the “needs a survey” follow-up path. If we build this well, the simpler questions are trivial afterwards.</p>
+        <p class="verdict"><span class="up">Best for</span> a team that wants to tackle the hardest question shape up front. <span class="down">Watch out</span> — it is mid-journey and slightly more than we need just to lock the basics, so it can eat more than an hour.</p>
+      </label>
+
+      <label class="opt" data-firstpage="check-answers">
+        <input type="radio" name="firstpage" value="check-answers">
+        <span class="name">C · Check your answers</span>
+        <p class="why"><strong>What it is:</strong> the summary page that lists every answer with a “Change” link.</p>
+        <p class="why"><strong>Why consider it:</strong> it forces us to agree all five answer keys at once and to solve “go back and edit, then return” navigation — the trickiest plumbing in the app.</p>
+        <p class="verdict"><span class="up">Best for</span> nailing the complete data shape immediately. <span class="down">Watch out</span> — it is the hardest page and shows nothing until questions exist, so it is frustrating as a <em>first</em> build. Better as the second thing we do.</p>
+      </label>
+    </fieldset>
+
+    <div class="callout info" id="firstPageHint">Whichever we pick, we should also drop in a bare-bones Start page and a Result page with a hardcoded outcome, so the slice runs end-to-end and proves navigation works.</div>
+  </section>
+
+  <!-- 4. CLAUDE.MD -->
+  <section id="claudemd">
+    <h2><span class="secnum" aria-hidden="true">4</span>The mob session’s job: produce a CLAUDE.md</h2>
+    <p>By the end of the hour, we should be able to answer every question below. Writing the answers into a <code>CLAUDE.md</code> at the project root is what lets us split up safely — and Claude reads it automatically, so AI-generated code follows our conventions too.</p>
+
+    <h3>Checklist — decide these out loud, then write them down</h3>
+    <ul class="mvp">
+      <li><span class="badge">LOCK</span><span><strong>State shape:</strong> the exact keys and value types for every answer.</span></li>
+      <li><span class="badge">LOCK</span><span><strong>How a page saves an answer:</strong> the <code>updateField(key, value)</code> signature.</span></li>
+      <li><span class="badge">LOCK</span><span><strong>Route order &amp; navigation:</strong> which page links to which, back and forward.</span></li>
+      <li><span class="badge">LOCK</span><span><strong>The question-page skeleton:</strong> one file everyone copies.</span></li>
+      <li><span class="badge">LOCK</span><span><strong>Validation pattern:</strong> what an error looks like (summary + inline + title prefix).</span></li>
+      <li><span class="badge">LOCK</span><span><strong>Eligibility contract:</strong> the input object and the result object shape.</span></li>
+      <li><span class="badge">LOCK</span><span><strong>Test &amp; AI_LOG conventions:</strong> where tests live, how we log AI use.</span></li>
+    </ul>
+
+    <h3>Copy-paste starter: <code>CLAUDE.md</code></h3>
+    <p>Paste this into a new <code>CLAUDE.md</code> at the project root and fill in anything we change during the mob session.</p>
+    <div class="copywrap">
+      <button class="btn secondary copybtn no-print" data-copy="claudeMdText" type="button">Copy</button>
+      <pre><code id="claudeMdText"># Green Home Grant — Eligibility Checker
+
+GOV.UK-styled React service that replaces a 35-minute eligibility phone call.
+Citizens answer 5 questions (one per page) and get an instant eligibility result.
+
+## Commands
+- `npm run dev`   — start the Vite dev server
+- `npm run build` — production build
+- `npm test`      — run unit tests (add vitest first)
+
+## Architecture (do not deviate without telling the team)
+- ALL answers live in ONE `formData` object in `src/App.jsx`. Never keep answers in a page's own state.
+  ```js
+  const [formData, setFormData] = useState({
+    propertyType: '', ownership: '', income: '', insulation: '', heating: ''
+  });
+  const updateField = (key, value) => setFormData(prev => ({ ...prev, [key]: value }));
+  ```
+- Every page receives `formData` and `updateField` as props from App.jsx.
+- Eligibility logic is a PURE function in `src/utils/eligibility.js` — no React inside it.
+
+## Answer vocabulary (use these EXACT string values)
+- propertyType: house | bungalow | flat | maisonette | other
+- ownership:    own | private-rent | housing-association | council
+- income:       under-31000 | 31000-50000 | over-50000
+- insulation:   both | wall | loft | none | dont-know
+- heating:      gas | oil | electric | heat-pump | other
+
+## Route order
+/ (Start) -> /property-type -> /ownership -> /income -> /insulation -> /heating
+  -> /check-answers -> /result
+
+## Question-page pattern
+Copy `src/pages/PropertyTypePage.jsx` — it is the reference. Every question page MUST:
+- show a back link at the top that returns to the previous route
+- put the question text in an <h1> INSIDE the <legend> (screen readers hear it once)
+- render options with the govuk-radios classes, bound to formData via updateField
+- on Continue: if no answer is selected, show the error summary (and focus it),
+  show an inline error with the SAME wording, and prefix the page <title> with "Error: "
+- on a valid answer, navigate to the next route
+
+## Eligibility contract
+checkEligibility(formData) -> {
+  outcome: 'eligible' | 'partial' | 'not-eligible',
+  funds: string[],            // e.g. ['insulation', 'heat-pump']
+  fundingLevel?: string,      // 'full' | 'contribution' | 'voucher'
+  survey?: boolean,
+  reasons?: string[]
+}
+
+## GOV.UK conventions
+- Reuse the classes already in `src/App.css` (govuk-*). Do NOT write new CSS.
+- Errors: error summary (role="alert", "There is a problem") + inline govuk-error-message, same wording.
+- Test every screen at 320px width, with keyboard only, with visible focus.
+
+## Testing
+- Use vitest. Eligibility tests go in `src/utils/eligibility.test.js`. Minimum 5 (we have 8 worked cases).
+
+## AI_LOG (do this AS YOU GO)
+- For every AI-assisted change, add an entry to `AI_LOG.md`:
+  Date | Task | What AI Generated | What You Changed + Why.
+</code></pre>
+    </div>
+
+    <h3>Copy-paste starter: the canonical question page</h3>
+    <p>This is the reference file the mob builds. Save it as <code>src/pages/PropertyTypePage.jsx</code>; every other question page copies this and changes the question, the key, and the options.</p>
+    <div class="copywrap">
+      <button class="btn secondary copybtn no-print" data-copy="skeletonText" type="button">Copy</button>
+      <pre><code id="skeletonText">import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+const FIELD = 'propertyType';
+const NEXT  = '/ownership';
+const PREV  = '/';
+const QUESTION = 'What type of property do you live in?';
+const OPTIONS = [
+  { value: 'house',      label: 'House' },
+  { value: 'bungalow',   label: 'Bungalow' },
+  { value: 'flat',       label: 'Flat' },
+  { value: 'maisonette', label: 'Maisonette' },
+  { value: 'other',      label: 'Other' },
+];
+
+export default function PropertyTypePage({ formData, updateField }) {
+  const navigate = useNavigate();
+  const [error, setError] = useState('');
+
+  function handleContinue() {
+    if (!formData[FIELD]) {
+      const msg = 'Select the type of property you live in';
+      setError(msg);
+      document.title = `Error: ${QUESTION} - GOV.UK`;
+      // focus the summary so screen readers and keyboard users hear the error
+      setTimeout(() => document.getElementById('error-summary')?.focus(), 0);
+      return;
+    }
+    navigate(NEXT);
+  }
+
+  return (
+    &lt;&gt;
+      &lt;a href={PREV} className="govuk-back-link"
+         onClick={(e) =&gt; { e.preventDefault(); navigate(PREV); }}&gt;Back&lt;/a&gt;
+
+      {error &amp;&amp; (
+        &lt;div className="govuk-error-summary" id="error-summary" tabIndex={-1} role="alert"&gt;
+          &lt;h2 className="govuk-error-summary__title"&gt;There is a problem&lt;/h2&gt;
+          &lt;div className="govuk-error-summary__body"&gt;
+            &lt;ul className="govuk-list govuk-error-summary__list"&gt;
+              &lt;li&gt;&lt;a href={`#${FIELD}`}&gt;{error}&lt;/a&gt;&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      )}
+
+      &lt;div className={`govuk-form-group${error ? ' govuk-form-group--error' : ''}`}&gt;
+        &lt;fieldset className="govuk-fieldset"&gt;
+          &lt;legend className="govuk-fieldset__legend govuk-fieldset__legend--xl"&gt;
+            &lt;h1 className="govuk-heading-xl"&gt;{QUESTION}&lt;/h1&gt;
+          &lt;/legend&gt;
+          {error &amp;&amp; (
+            &lt;p id={`${FIELD}-error`} className="govuk-error-message"&gt;
+              &lt;span className="govuk-visually-hidden"&gt;Error:&lt;/span&gt; {error}
+            &lt;/p&gt;
+          )}
+          &lt;div className="govuk-radios" id={FIELD}&gt;
+            {OPTIONS.map((opt) =&gt; (
+              &lt;div className="govuk-radios__item" key={opt.value}&gt;
+                &lt;input
+                  className="govuk-radios__input"
+                  id={`${FIELD}-${opt.value}`}
+                  name={FIELD}
+                  type="radio"
+                  value={opt.value}
+                  checked={formData[FIELD] === opt.value}
+                  onChange={(e) =&gt; updateField(FIELD, e.target.value)}
+                /&gt;
+                &lt;label className="govuk-radios__label" htmlFor={`${FIELD}-${opt.value}`}&gt;
+                  {opt.label}
+                &lt;/label&gt;
+              &lt;/div&gt;
+            ))}
+          &lt;/div&gt;
+        &lt;/fieldset&gt;
+      &lt;/div&gt;
+
+      &lt;button className="govuk-button" onClick={handleContinue}&gt;Continue&lt;/button&gt;
+    &lt;/&gt;
+  );
+}
+</code></pre>
+    </div>
+    <div class="callout info">And in <code>App.jsx</code>, hold the state once and pass it to each route:
+      <pre><code>const [formData, setFormData] = useState({ propertyType:'', ownership:'', income:'', insulation:'', heating:'' });
+const updateField = (key, value) => setFormData(prev => ({ ...prev, [key]: value }));
+// &lt;Route path="/property-type" element={&lt;PropertyTypePage formData={formData} updateField={updateField} /&gt;} /&gt;</code></pre>
+    </div>
+  </section>
+
+  <!-- 5. ARCHITECTURE -->
   <section id="architecture">
-    <h2><span class="secnum" aria-hidden="true">2</span>Architecture decisions (and the why)</h2>
-    <p>The starter already has all 9 page routes, working router, and GOV.UK CSS. Lock these four decisions before anyone writes a feature — they kill the two failure modes that sink hackathon teams.</p>
+    <h2><span class="secnum" aria-hidden="true">5</span>Architecture decisions (and the why)</h2>
+    <p>The starter already has all 9 page routes, a working router, and GOV.UK CSS. These four decisions are what the mob session locks in.</p>
     <div class="grid grid-2">
       <div class="card accent">
         <h4>1. One state object, lifted to <code>App.jsx</code></h4>
-        <p>Hold a single <code>formData</code> object in <code>useState</code> at the top of <code>App.jsx</code>; pass it and an <code>updateField(key, value)</code> callback down to each page via props.</p>
+        <p>Hold a single <code>formData</code> object in <code>useState</code> at the top of <code>App.jsx</code>; pass it and <code>updateField(key, value)</code> down to each page.</p>
         <p class="src"><strong>Why:</strong> the #1 hackathon failure is “form state lost between pages.” One source of truth fixes it for good.</p>
       </div>
       <div class="card accent">
         <h4>2. Eligibility = a pure function</h4>
-        <p>Put the logic in <code>src/utils/eligibility.js</code> — input: <code>formData</code>, output: a result object. No React inside it.</p>
-        <p class="src"><strong>Why:</strong> testable without rendering. This is how you hit “5+ unit tests” cheaply and how you keep logic out of components.</p>
+        <p>Logic lives in <code>src/utils/eligibility.js</code> — input <code>formData</code>, output a result object. No React inside.</p>
+        <p class="src"><strong>Why:</strong> testable without rendering. That’s how you hit “5+ unit tests” cheaply.</p>
       </div>
       <div class="card accent">
         <h4>3. Reuse the CSS — don’t write new CSS</h4>
-        <p>Use <code>govuk-heading-xl</code>, <code>govuk-body</code>, <code>govuk-button</code>, <code>govuk-radios</code>, <code>govuk-form-group--error</code>, etc. They’re already in <code>App.css</code>.</p>
-        <p class="src"><strong>Why:</strong> custom CSS burns time and breaks contrast/spacing compliance. The scale is already correct.</p>
+        <p>Use <code>govuk-heading-xl</code>, <code>govuk-body</code>, <code>govuk-button</code>, <code>govuk-radios</code>, <code>govuk-form-group--error</code>. Already in <code>App.css</code>.</p>
+        <p class="src"><strong>Why:</strong> custom CSS burns time and breaks contrast/spacing compliance.</p>
       </div>
       <div class="card accent">
         <h4>4. Mount what’s already built</h4>
-        <p><code>PhaseBanner</code> and <code>GovukFooter</code> exist but aren’t mounted. Add them to the layout in <code>App.jsx</code>. Footer links to the accessibility statement.</p>
-        <p class="src"><strong>Why:</strong> free marks — phase banner + footer signal GOV.UK fluency to judges.</p>
+        <p><code>PhaseBanner</code> and <code>GovukFooter</code> exist but aren’t mounted. Add them to the layout in <code>App.jsx</code>.</p>
+        <p class="src"><strong>Why:</strong> free marks — they signal GOV.UK fluency to judges.</p>
       </div>
     </div>
-    <div class="callout good"><strong>Architecture contract (agree this out loud before splitting):</strong> answer keys are <code>propertyType, ownership, income, insulation, heating</code>; each is a string from the option list in §4; <code>updateField</code> is the only way to mutate state; navigation uses <code>useNavigate</code> with the existing routes.</div>
   </section>
 
-  <!-- 3. PATTERNS -->
+  <!-- 6. PATTERNS -->
   <section id="patterns">
-    <h2><span class="secnum" aria-hidden="true">3</span>GOV.UK pattern reference</h2>
-    <p>The patterns the judges will check against. Links go to the official Design System.</p>
+    <h2><span class="secnum" aria-hidden="true">6</span>GOV.UK pattern reference</h2>
+    <p>The patterns judges check against. Links go to the official Design System.</p>
     <div class="grid grid-2">
       <div class="card">
         <h4>Start page</h4>
-        <p>Title, short description of what the service does + who it’s for, and a green <code>govuk-button--start</code> “Start now” linking into the flow. Keep eligibility questions <em>out</em> of the start page.</p>
+        <p>Title, short description of what the service does + who it’s for, and a green <code>govuk-button--start</code> “Start now” link. Keep eligibility questions <em>off</em> the start page.</p>
         <p class="src"><a href="https://design-system.service.gov.uk/patterns/start-using-a-service/" target="_blank" rel="noopener">Start using a service ↗</a></p>
       </div>
       <div class="card">
-        <h4>One thing per page (question pages)</h4>
-        <p>The question <em>is</em> the page <code>&lt;h1&gt;</code>, set via the <code>&lt;legend&gt;</code> (radios) or <code>&lt;label&gt;</code> so screen readers hear it once. A <strong>back link</strong> at the top; a left-aligned <strong>“Continue”</strong> button (not “Next”). Offer “I do not know” where it’s honest.</p>
+        <h4>One thing per page</h4>
+        <p>The question <em>is</em> the page <code>&lt;h1&gt;</code>, set via the <code>&lt;legend&gt;</code> (radios) or <code>&lt;label&gt;</code>. Back link at top; left-aligned <strong>“Continue”</strong> button. Offer “I do not know” where honest.</p>
         <p class="src"><a href="https://design-system.service.gov.uk/patterns/question-pages/" target="_blank" rel="noopener">Question pages ↗</a> · <a href="https://design-system.service.gov.uk/components/radios/" target="_blank" rel="noopener">Radios ↗</a></p>
       </div>
       <div class="card">
         <h4>Check answers</h4>
-        <p><code>govuk-summary-list</code> with key / value / action rows. Every row’s “Change” link has visually-hidden text naming the field (<code>&lt;span class="govuk-visually-hidden"&gt;property type&lt;/span&gt;</code>). Final button: <strong>“Accept and continue”</strong>. Change links return the user to that question with the value pre-filled.</p>
+        <p><code>govuk-summary-list</code> with key / value / action rows. Each “Change” link has visually-hidden text naming the field. Final button: <strong>“Accept and continue”</strong>. Change links pre-fill the value.</p>
         <p class="src"><a href="https://design-system.service.gov.uk/patterns/check-answers/" target="_blank" rel="noopener">Check answers ↗</a> · <a href="https://design-system.service.gov.uk/components/summary-list/" target="_blank" rel="noopener">Summary list ↗</a></p>
       </div>
       <div class="card">
         <h4>Validation &amp; errors</h4>
-        <p>On error: prefix the page <code>&lt;title&gt;</code> with “Error: ”, show an <strong>error summary</strong> (<code>role="alert"</code>, “There is a problem”, focus it on load) linking to each bad field, plus an <strong>inline error</strong> next to the field with the <em>same wording</em>. Use <code>govuk-form-group--error</code>.</p>
+        <p>On error: prefix <code>&lt;title&gt;</code> with “Error: ”, show an <strong>error summary</strong> (<code>role="alert"</code>, “There is a problem”, focus it) linking to each bad field, plus an <strong>inline error</strong> with the same wording.</p>
         <p class="src"><a href="https://design-system.service.gov.uk/components/error-summary/" target="_blank" rel="noopener">Error summary ↗</a> · <a href="https://design-system.service.gov.uk/components/error-message/" target="_blank" rel="noopener">Error message ↗</a></p>
       </div>
       <div class="card">
         <h4>Result / confirmation</h4>
-        <p>A clear outcome up top. For “eligible” use a green <code>govuk-panel</code>; for partial/not-eligible state it plainly and explain <em>why</em> and <em>what to do next</em>. Never rely on colour alone — back it with text.</p>
+        <p>Clear outcome up top. “Eligible” → green <code>govuk-panel</code>; partial/not-eligible → state it plainly with <em>why</em> and <em>what to do next</em>. Never colour alone.</p>
         <p class="src"><a href="https://design-system.service.gov.uk/components/panel/" target="_blank" rel="noopener">Panel ↗</a></p>
       </div>
       <div class="card">
         <h4>Typography, spacing &amp; 320px</h4>
-        <p>GDS font stack, <code>xl/l/m</code> heading scale, 5px spacing increments — all in <code>App.css</code>. Test at 320px width: no horizontal scroll, tap targets ≥ 44px, focus visible on every control.</p>
+        <p>GDS font stack, <code>xl/l/m</code> heading scale, 5px spacing increments — all in <code>App.css</code>. Test at 320px: no horizontal scroll, tap targets ≥ 44px, focus visible.</p>
         <p class="src"><a href="https://design-system.service.gov.uk/styles/type-scale/" target="_blank" rel="noopener">Type scale ↗</a> · <a href="https://design-system.service.gov.uk/styles/spacing/" target="_blank" rel="noopener">Spacing ↗</a></p>
       </div>
     </div>
   </section>
 
-  <!-- 4. ELIGIBILITY -->
+  <!-- 7. ELIGIBILITY -->
   <section id="eligibility">
-    <h2><span class="secnum" aria-hidden="true">4</span>Eligibility ruleset (concrete &amp; testable)</h2>
-    <p>A deterministic ruleset wired to the existing page stubs. This is your spec for <code>src/utils/eligibility.js</code> and your unit tests. Tweak the thresholds if you like — keep it pure.</p>
+    <h2><span class="secnum" aria-hidden="true">7</span>Eligibility ruleset (concrete &amp; testable)</h2>
+    <p>A deterministic ruleset wired to the existing page stubs. This is your spec for <code>src/utils/eligibility.js</code> and your unit tests. Tweak thresholds if you like — keep it pure.</p>
 
     <h3>The 5 questions &amp; answer keys</h3>
     <table>
@@ -290,7 +533,9 @@
     </table>
 
     <h3>Decision logic</h3>
-    <pre><code>export function checkEligibility({ propertyType, ownership, income, insulation, heating }) {
+    <div class="copywrap">
+      <button class="btn secondary copybtn no-print" data-copy="eligText" type="button">Copy</button>
+      <pre><code id="eligText">export function checkEligibility({ propertyType, ownership, income, insulation, heating }) {
   // 1. Gate — private renters must apply via their landlord
   if (ownership === 'private-rent')
     return { outcome: 'not-eligible', funds: [], reasons: ['landlord-must-apply'] };
@@ -320,6 +565,7 @@
 
   return { outcome: 'not-eligible', funds: [], reasons: ['income-too-high'] };
 }</code></pre>
+    </div>
 
     <h3>Worked test cases (8 — exceeds the “5 unit tests” bar)</h3>
     <table>
@@ -337,9 +583,9 @@
     </table>
   </section>
 
-  <!-- 5. TEAM -->
+  <!-- 8. TEAM -->
   <section id="team">
-    <h2><span class="secnum" aria-hidden="true">5</span>Your team</h2>
+    <h2><span class="secnum" aria-hidden="true">8</span>Your team</h2>
     <p>Enter the four names. They populate the owner dropdowns and the exported JSON. (Leave blank to keep the <code>dev1…dev4</code> labels.)</p>
     <div class="grid grid-2" id="teamInputs">
       <div><label class="fld" for="name-dev1">Developer 1</label><input type="text" id="name-dev1" data-dev="dev1" placeholder="e.g. Alex" autocomplete="off"></div>
@@ -349,63 +595,44 @@
     </div>
   </section>
 
-  <!-- 6. STRATEGY -->
-  <section id="strategy">
-    <h2><span class="secnum" aria-hidden="true">6</span>Work-division strategy</h2>
-    <p>Pick one. Each splits the same work differently — there’s no wrong answer, only a best fit for how your team likes to work.</p>
-    <fieldset style="border:0;padding:0;margin:0;">
-      <legend class="govuk-visually-hidden" style="position:absolute;left:-9999px;">Choose a work-division strategy</legend>
-      <label class="strategy-opt" data-strategy="vertical-slice-then-feature">
-        <input type="radio" name="strategy" value="vertical-slice-then-feature">
-        <span class="name">A · Vertical slice, then feature ownership — Recommended</span>
-        <p class="pros">All four mob one working slice (Start → 1 question → hardcoded result) for ~1 hr to lock the state shape and navigation. Then split: Flow / Logic / Review / Quality. <strong>Best for:</strong> avoiding the “state lost between pages” trap. <strong>Cost:</strong> 1 hr of everyone up front.</p>
-      </label>
-      <label class="strategy-opt" data-strategy="two-pairs">
-        <input type="radio" name="strategy" value="two-pairs">
-        <span class="name">B · Two pairs</span>
-        <p class="pros">Pair A = flow + validation; Pair B = logic + tests + check-answers + result; accessibility &amp; AI_LOG rotate. <strong>Best for:</strong> inexperienced teams — pairing catches bugs early. <strong>Cost:</strong> only two parallel tracks.</p>
-      </label>
-      <label class="strategy-opt" data-strategy="page-ownership">
-        <input type="radio" name="strategy" value="page-ownership">
-        <span class="name">C · Page ownership (simplest)</span>
-        <p class="pros">Each dev owns ~2 pages end-to-end after agreeing the state contract. <strong>Best for:</strong> max parallelism. <strong>Cost:</strong> highest risk of inconsistent state/styling — nail the contract in §2 first.</p>
-      </label>
-    </fieldset>
-    <div class="callout info" id="roleHint">Choose a strategy to see the suggested role split. You can still reassign individual tasks in §7.</div>
-  </section>
-
-  <!-- 7. TASKS -->
+  <!-- 9. TASKS -->
   <section id="tasks">
-    <h2><span class="secnum" aria-hidden="true">7</span>Task board</h2>
-    <p>The full build, grouped by workstream. Assign an owner to each and tick what’s planned for day 1. Owners default to the suggested split for your chosen strategy.</p>
+    <h2><span class="secnum" aria-hidden="true">9</span>Feature split &amp; task board</h2>
+    <p>After the mob slice, we split into four feature areas. Each task has a suggested owner — reassign freely. Tick what’s planned for day 1.</p>
+    <div class="grid grid-2" style="margin-bottom: var(--s4);">
+      <div class="card"><h4>Dev 1 — Flow</h4><p class="src">Remaining question pages, App-level state, back/continue navigation.</p></div>
+      <div class="card"><h4>Dev 2 — Logic</h4><p class="src"><code>eligibility.js</code>, vitest setup, 8 tests, Result page.</p></div>
+      <div class="card"><h4>Dev 3 — Review</h4><p class="src">Check-answers page, validation &amp; error pattern across all pages.</p></div>
+      <div class="card"><h4>Dev 4 — Quality</h4><p class="src">WCAG 2.2 AA, 320px, mount banner/footer, accessibility statement, AI_LOG.</p></div>
+    </div>
     <div id="taskBoard"></div>
   </section>
 
-  <!-- 8. STRETCH -->
+  <!-- 10. STRETCH -->
   <section id="stretch">
-    <h2><span class="secnum" aria-hidden="true">8</span>Stretch goals</h2>
+    <h2><span class="secnum" aria-hidden="true">10</span>Stretch goals</h2>
     <p>Only after all six MVP items ship cleanly. Listed in the brief’s recommended priority order — pick what you’ll commit to.</p>
     <div id="stretchList">
-      <div class="chk"><input type="checkbox" id="st-localstorage" value="localstorage"><label for="st-localstorage"><span class="gname">Save &amp; return with localStorage</span> — persist <code>formData</code> so a refresh doesn’t lose answers. Demonstrates the “redundant entry” 2.2 criterion handled well.</label></div>
-      <div class="chk"><input type="checkbox" id="st-pathway" value="second-pathway"><label for="st-pathway"><span class="gname">Second eligibility pathway</span> — e.g. a fast-track for pension-credit recipients, or a different scheme branch. Shows the logic generalises.</label></div>
+      <div class="chk"><input type="checkbox" id="st-localstorage" value="localstorage"><label for="st-localstorage"><span class="gname">Save &amp; return with localStorage</span> — persist <code>formData</code> so a refresh doesn’t lose answers.</label></div>
+      <div class="chk"><input type="checkbox" id="st-pathway" value="second-pathway"><label for="st-pathway"><span class="gname">Second eligibility pathway</span> — e.g. a fast-track for pension-credit recipients. Shows the logic generalises.</label></div>
       <div class="chk"><input type="checkbox" id="st-playwright" value="playwright"><label for="st-playwright"><span class="gname">Playwright end-to-end tests</span> — drive the whole flow start → result in a real browser.</label></div>
-      <div class="chk"><input type="checkbox" id="st-axe" value="axe-core"><label for="st-axe"><span class="gname">Automated accessibility check (axe-core)</span> — run axe in a test to back up the WCAG claim with evidence.</label></div>
+      <div class="chk"><input type="checkbox" id="st-axe" value="axe-core"><label for="st-axe"><span class="gname">Automated accessibility check (axe-core)</span> — back up the WCAG claim with evidence.</label></div>
     </div>
     <div class="callout warn"><strong>Discouraged:</strong> cosmetic additions (animations, theming) that don’t demonstrate new capability. Judges reward depth, not decoration.</div>
   </section>
 
-  <!-- 9. AI LOG -->
+  <!-- 11. AI LOG -->
   <section id="ailog">
-    <h2><span class="secnum" aria-hidden="true">9</span>AI_LOG plan</h2>
-    <p>The brief wants <strong>variety</strong> — 3+ entries across 3–5 distinct patterns, not “asked Claude to write X” three times. Assign each pattern to whoever will own that piece of work so the log writes itself.</p>
+    <h2><span class="secnum" aria-hidden="true">11</span>AI_LOG plan</h2>
+    <p>The brief wants <strong>variety</strong> — 3+ entries across 3–5 distinct patterns, not “asked Claude to write X” three times. Assign each pattern to whoever owns that work so the log writes itself.</p>
     <div id="aiLogBoard" class="grid grid-2"></div>
-    <div class="callout good"><strong>Each entry needs 4 fields:</strong> Date · Task · What AI Generated · What You Changed + Why. The “What You Changed + Why” is where marks live — show judgement, not just copy-paste. Use the seeded <code>AI_LOG.md</code>.</div>
+    <div class="callout good"><strong>Each entry needs 4 fields:</strong> Date · Task · What AI Generated · What You Changed + Why. The “What You Changed + Why” is where the marks live — show judgement, not copy-paste. Use the seeded <code>AI_LOG.md</code>.</div>
   </section>
 
-  <!-- 10. EXPORT -->
+  <!-- 12. EXPORT -->
   <section id="export">
-    <h2><span class="secnum" aria-hidden="true">10</span>Generate JSON</h2>
-    <p>When your choices are in, generate the deterministic JSON below and paste it back into the Claude chat. I’ll turn it into a tailored per-person execution plan and start scaffolding <code>eligibility.js</code>, the tests, and the state wiring.</p>
+    <h2><span class="secnum" aria-hidden="true">12</span>Generate JSON</h2>
+    <p>When your choices are in, generate the deterministic JSON below and paste it back into the Claude chat. I’ll turn it into a tailored per-person execution plan and start scaffolding the first-page reference, <code>eligibility.js</code>, the tests, and the state wiring.</p>
     <div class="toolbar no-print">
       <button class="btn" id="genBtn" type="button">Generate JSON</button>
       <button class="btn secondary" id="copyBtn" type="button">Copy to clipboard</button>
@@ -423,33 +650,40 @@
   </div>
 </footer>
 
+<style>.vh{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;}</style>
+
 <script>
 (function () {
   "use strict";
 
-  // ---- Data model -------------------------------------------------------
   var DEVS = ["dev1", "dev2", "dev3", "dev4"];
 
-  // Workstreams -> tasks. Each task has an id, label, and a default role key.
+  // Strategy is fixed: A (vertical slice, then feature ownership).
+  var STRATEGY = "vertical-slice-then-feature";
+
+  // Suggested role -> dev mapping for Strategy A.
+  var ROLE_BY_DEV = { dev1: "flow", dev2: "logic", dev3: "review", dev4: "quality" };
+  var DEV_BY_ROLE = { flow: "dev1", logic: "dev2", review: "dev3", quality: "dev4" };
+
   var WORKSTREAMS = [
-    { name: "Flow & state", role: "flow", tasks: [
+    { name: "Flow & state (Dev 1)", role: "flow", tasks: [
       { id: "app-state", label: "Lift formData into App.jsx + updateField callback" },
       { id: "q-pages", label: "Wire all 5 question pages (radios, value binding, Continue)" },
       { id: "navigation", label: "Back/Continue navigation with useNavigate across the flow" },
       { id: "start-page", label: "Start page: title, description, Start now button" }
     ]},
-    { name: "Eligibility logic", role: "logic", tasks: [
+    { name: "Eligibility logic (Dev 2)", role: "logic", tasks: [
       { id: "elig-fn", label: "Write src/utils/eligibility.js (pure function)" },
       { id: "vitest-setup", label: "Add vitest to package.json + config" },
       { id: "elig-tests", label: "Write 8 unit tests from the worked cases" },
       { id: "result-page", label: "Result page: render outcome, funds, what-to-do-next" }
     ]},
-    { name: "Review & validation", role: "review", tasks: [
+    { name: "Review & validation (Dev 3)", role: "review", tasks: [
       { id: "check-answers", label: "Check-answers page: summary list + Change links" },
       { id: "validation", label: "Client-side validation: error summary + inline errors" },
       { id: "error-title", label: "Add 'Error: ' page-title prefix + focus error summary" }
     ]},
-    { name: "Quality & accessibility", role: "quality", tasks: [
+    { name: "Quality & accessibility (Dev 4)", role: "quality", tasks: [
       { id: "mount-chrome", label: "Mount PhaseBanner + GovukFooter in App.jsx" },
       { id: "wcag-pass", label: "WCAG 2.2 AA pass: labels, keyboard, contrast, focus" },
       { id: "responsive-320", label: "Test at 320px — no horizontal scroll" },
@@ -457,15 +691,6 @@
       { id: "ailog-curate", label: "Curate AI_LOG.md — ensure 3+ varied entries" }
     ]}
   ];
-
-  // Suggested role -> dev mapping per strategy.
-  var STRATEGY_ROLES = {
-    "vertical-slice-then-feature": { flow: "dev1", logic: "dev2", review: "dev3", quality: "dev4" },
-    // Two pairs: dev1+dev2 = flow & validation; dev3+dev4 = logic & outcome
-    "two-pairs": { flow: "dev1", review: "dev2", logic: "dev3", quality: "dev4" },
-    // Page ownership: spread evenly
-    "page-ownership": { flow: "dev1", logic: "dev2", review: "dev3", quality: "dev4" }
-  };
 
   var AILOG_PATTERNS = [
     { id: "planning", label: "Planning", hint: "Using plan mode to scope the build before coding" },
@@ -475,14 +700,19 @@
     { id: "test-generation", label: "Test generation", hint: "Generating unit tests from the ruleset" }
   ];
 
-  // ---- State ------------------------------------------------------------
+  var FIRSTPAGE_LABELS = {
+    "property-type": "Property type",
+    "insulation": "Insulation",
+    "check-answers": "Check your answers"
+  };
+
   var state = {
-    strategy: "vertical-slice-then-feature",
+    firstPage: "property-type",
     names: { dev1: "", dev2: "", dev3: "", dev4: "" },
-    taskOwners: {},      // taskId -> devId
-    taskPlanned: {},     // taskId -> bool
-    stretch: {},         // goalId -> bool
-    aiLog: {}            // patternId -> devId
+    taskOwners: {},
+    taskPlanned: {},
+    stretch: {},
+    aiLog: {}
   };
 
   function devLabel(devId) {
@@ -503,18 +733,13 @@
     });
   }
 
-  // ---- Defaults ---------------------------------------------------------
-  function applyStrategyDefaults() {
-    var roleMap = STRATEGY_ROLES[state.strategy] || {};
+  function applyDefaults() {
     WORKSTREAMS.forEach(function (ws) {
-      var owner = roleMap[ws.role] || "dev1";
-      ws.tasks.forEach(function (t) {
-        state.taskOwners[t.id] = owner; // reset to suggested split on strategy change
-      });
+      var owner = DEV_BY_ROLE[ws.role] || "dev1";
+      ws.tasks.forEach(function (t) { state.taskOwners[t.id] = owner; });
     });
   }
 
-  // ---- Renderers --------------------------------------------------------
   function renderTaskBoard() {
     var html = "";
     WORKSTREAMS.forEach(function (ws) {
@@ -522,11 +747,11 @@
       ws.tasks.forEach(function (t) {
         html += '<div class="task-row">';
         html += '<div class="tlabel">' + escapeHtml(t.label) + "</div>";
-        html += '<div><label class="govuk-visually-hidden" for="owner-' + t.id + '">Owner for ' + escapeHtml(t.label) + '</label>';
+        html += '<div><label class="vh" for="owner-' + t.id + '">Owner for ' + escapeHtml(t.label) + '</label>';
         html += '<select id="owner-' + t.id + '" data-task="' + t.id + '">' + ownerOptions(state.taskOwners[t.id]) + "</select></div>";
         var checked = state.taskPlanned[t.id] ? " checked" : "";
         html += '<div><input type="checkbox" data-plan="' + t.id + '" id="plan-' + t.id + '"' + checked + ' style="transform:scale(1.4);accent-color:var(--blue);">';
-        html += '<label class="govuk-visually-hidden" for="plan-' + t.id + '">Plan ' + escapeHtml(t.label) + ' for day 1</label></div>';
+        html += '<label class="vh" for="plan-' + t.id + '">Plan ' + escapeHtml(t.label) + ' for day 1</label></div>';
         html += "</div>";
       });
     });
@@ -547,7 +772,6 @@
   }
 
   function refreshOwnerSelects() {
-    // Re-render labels in all owner dropdowns when names change, preserving selection.
     document.querySelectorAll("select[data-task]").forEach(function (sel) {
       sel.innerHTML = ownerOptions(state.taskOwners[sel.getAttribute("data-task")]);
     });
@@ -557,43 +781,26 @@
     });
   }
 
-  function renderStrategyHint() {
-    var hints = {
-      "vertical-slice-then-feature": "Flow → " + devLabel(STRATEGY_ROLES["vertical-slice-then-feature"].flow) + " · Logic → " + devLabel("dev2") + " · Review → " + devLabel("dev3") + " · Quality → " + devLabel("dev4") + ". Everyone mobs the first slice together before splitting.",
-      "two-pairs": "Pair A (" + devLabel("dev1") + " + " + devLabel("dev2") + ") = flow & validation · Pair B (" + devLabel("dev3") + " + " + devLabel("dev4") + ") = logic, tests, check-answers & result.",
-      "page-ownership": "Each owns ~2 pages end-to-end after agreeing the §2 state contract: " + devLabel("dev1") + ", " + devLabel("dev2") + ", " + devLabel("dev3") + ", " + devLabel("dev4") + "."
-    };
-    document.getElementById("roleHint").textContent = hints[state.strategy] || "";
-  }
-
-  function markSelectedStrategy() {
-    document.querySelectorAll(".strategy-opt").forEach(function (el) {
-      el.classList.toggle("selected", el.getAttribute("data-strategy") === state.strategy);
+  function markFirstPage() {
+    document.querySelectorAll(".opt").forEach(function (el) {
+      el.classList.toggle("selected", el.getAttribute("data-firstpage") === state.firstPage);
     });
+    var mid = document.getElementById("sliceMiddle");
+    if (mid) mid.textContent = FIRSTPAGE_LABELS[state.firstPage] || "Property type";
   }
 
-  // ---- Deterministic JSON ----------------------------------------------
-  // Stable: keys sorted recursively, arrays sorted, no timestamps/random.
   function sortValue(v) {
     if (Array.isArray(v)) return v.map(sortValue);
     if (v && typeof v === "object") {
-      return Object.keys(v).sort().reduce(function (acc, k) {
-        acc[k] = sortValue(v[k]);
-        return acc;
-      }, {});
+      return Object.keys(v).sort().reduce(function (acc, k) { acc[k] = sortValue(v[k]); return acc; }, {});
     }
     return v;
   }
 
   function buildOutput() {
-    // assignments: devId -> { role, name, tasks: [sorted] }
-    var roleMap = STRATEGY_ROLES[state.strategy] || {};
-    var roleByDev = {};
-    Object.keys(roleMap).forEach(function (role) { roleByDev[roleMap[role]] = role; });
-
     var assignments = {};
     DEVS.forEach(function (d) {
-      assignments[d] = { name: devLabel(d), role: roleByDev[d] || "", tasks: [] };
+      assignments[d] = { name: devLabel(d), role: ROLE_BY_DEV[d] || "", tasks: [] };
     });
     Object.keys(state.taskOwners).forEach(function (taskId) {
       var owner = state.taskOwners[taskId];
@@ -602,7 +809,6 @@
     DEVS.forEach(function (d) { assignments[d].tasks.sort(); });
 
     var plannedDay1 = Object.keys(state.taskPlanned).filter(function (k) { return state.taskPlanned[k]; }).sort();
-
     var stretchGoals = Object.keys(state.stretch).filter(function (k) { return state.stretch[k]; }).sort();
 
     var aiLogPlan = {};
@@ -614,92 +820,100 @@
     DEVS.forEach(function (d) { aiLogPlan[d].sort(); });
 
     var out = {
-      schemaVersion: "1.0",
+      schemaVersion: "1.1",
       aiLogPlan: aiLogPlan,
       assignments: assignments,
       eligibilityRuleset: "concrete-v1",
+      mobFirstPage: state.firstPage,
       plannedDay1: plannedDay1,
-      strategy: state.strategy,
+      strategy: STRATEGY,
       stretchGoals: stretchGoals,
       team: { members: DEVS.map(function (d) { return { id: d, name: devLabel(d) }; }) }
     };
     return JSON.stringify(sortValue(out), null, 2);
   }
 
-  // ---- Wiring -----------------------------------------------------------
   function init() {
-    applyStrategyDefaults();
+    applyDefaults();
     renderTaskBoard();
     renderAiLog();
-    markSelectedStrategy();
-    renderStrategyHint();
+    markFirstPage();
 
-    // Pre-select default strategy radio
-    var defRadio = document.querySelector('input[name="strategy"][value="' + state.strategy + '"]');
+    var defRadio = document.querySelector('input[name="firstpage"][value="' + state.firstPage + '"]');
     if (defRadio) defRadio.checked = true;
 
-    // Names
     document.querySelectorAll("#teamInputs input[data-dev]").forEach(function (inp) {
       inp.addEventListener("input", function () {
         state.names[inp.getAttribute("data-dev")] = inp.value;
         refreshOwnerSelects();
-        renderStrategyHint();
       });
     });
 
-    // Strategy
-    document.querySelectorAll('input[name="strategy"]').forEach(function (r) {
+    document.querySelectorAll('input[name="firstpage"]').forEach(function (r) {
       r.addEventListener("change", function () {
-        if (r.checked) {
-          state.strategy = r.value;
-          applyStrategyDefaults();
-          renderTaskBoard();
-          markSelectedStrategy();
-          renderStrategyHint();
-        }
+        if (r.checked) { state.firstPage = r.value; markFirstPage(); }
       });
     });
 
-    // Task board (delegated)
     document.getElementById("taskBoard").addEventListener("change", function (e) {
       var t = e.target;
       if (t.matches("select[data-task]")) state.taskOwners[t.getAttribute("data-task")] = t.value;
       if (t.matches("input[data-plan]")) state.taskPlanned[t.getAttribute("data-plan")] = t.checked;
     });
 
-    // AI log (delegated)
     document.getElementById("aiLogBoard").addEventListener("change", function (e) {
       var t = e.target;
       if (t.matches("select[data-ai]")) state.aiLog[t.getAttribute("data-ai")] = t.value;
     });
 
-    // Stretch goals
     document.getElementById("stretchList").addEventListener("change", function (e) {
       var t = e.target;
       if (t.matches('input[type="checkbox"]')) state.stretch[t.value] = t.checked;
     });
 
-    // Generate / copy
     document.getElementById("genBtn").addEventListener("click", function () {
       document.getElementById("jsonOut").value = buildOutput();
       document.getElementById("copyStatus").textContent = "Generated.";
     });
+
     document.getElementById("copyBtn").addEventListener("click", function () {
       var ta = document.getElementById("jsonOut");
       if (!ta.value) ta.value = buildOutput();
       ta.select();
-      var ok = false;
-      try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
-      if (navigator.clipboard) {
-        navigator.clipboard.writeText(ta.value).then(function () {
-          document.getElementById("copyStatus").textContent = "Copied to clipboard.";
-        }, function () {
-          document.getElementById("copyStatus").textContent = ok ? "Copied." : "Press Ctrl/Cmd+C to copy.";
-        });
-      } else {
-        document.getElementById("copyStatus").textContent = ok ? "Copied." : "Press Ctrl/Cmd+C to copy.";
-      }
+      copyText(ta.value, "copyStatus");
     });
+
+    // Generic copy buttons (CLAUDE.md, skeleton, eligibility)
+    document.querySelectorAll(".copybtn[data-copy]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var el = document.getElementById(btn.getAttribute("data-copy"));
+        if (!el) return;
+        var text = el.textContent;
+        copyText(text, null, btn);
+      });
+    });
+  }
+
+  function copyText(text, statusId, btn) {
+    function done(ok) {
+      if (statusId) document.getElementById(statusId).textContent = ok ? "Copied to clipboard." : "Press Ctrl/Cmd+C to copy.";
+      if (btn) {
+        var orig = btn.textContent;
+        btn.textContent = ok ? "Copied!" : "Select + Ctrl/Cmd+C";
+        setTimeout(function () { btn.textContent = orig; }, 1500);
+      }
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () { done(true); }, function () { done(false); });
+    } else {
+      var ok = false;
+      try {
+        var tmp = document.createElement("textarea");
+        tmp.value = text; document.body.appendChild(tmp); tmp.select();
+        ok = document.execCommand("copy"); document.body.removeChild(tmp);
+      } catch (e) { ok = false; }
+      done(ok);
+    }
   }
 
   if (document.readyState === "loading") {
