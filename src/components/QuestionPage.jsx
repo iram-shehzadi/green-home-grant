@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import GovukButton from './GovukButton';
 
 /**
@@ -58,16 +58,11 @@ function QuestionPage({
 
   return (
     <>
-      <a
-        href={backPath}
-        className="govuk-back-link"
-        onClick={(e) => {
-          e.preventDefault();
-          navigate(backPath);
-        }}
-      >
+      {/* Link applies the router basename (the /proxy/<port> prefix) to the
+          href automatically and handles SPA navigation. */}
+      <Link to={backPath} className="govuk-back-link">
         Back
-      </a>
+      </Link>
 
       {error && (
         <div
