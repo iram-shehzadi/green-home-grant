@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import GovukHeader from './components/GovukHeader';
 // TODO: Mount PhaseBanner below GovukHeader — import PhaseBanner from './components/PhaseBanner';
@@ -13,8 +14,18 @@ import ResultPage from './pages/ResultPage';
 import AccessibilityStatementPage from './pages/AccessibilityStatementPage';
 
 function App() {
-  // TODO: Add form state here (useState) to hold all question answers
-  // TODO: Pass state and setter to each page component via props
+  // Single source of truth: every answer lives here and is passed to each
+  // question page via props (see CLAUDE.md — never store answers in a page).
+  const [formData, setFormData] = useState({
+    propertyType: '',
+    ownership: '',
+    income: '',
+    insulation: '',
+    heating: '',
+  });
+
+  const updateField = (key, value) =>
+    setFormData((prev) => ({ ...prev, [key]: value }));
 
   return (
     <>
@@ -24,7 +35,12 @@ function App() {
         <main className="govuk-main-wrapper" role="main">
           <Routes>
             <Route path="/" element={<StartPage />} />
-            <Route path="/property-type" element={<PropertyTypePage />} />
+            <Route
+              path="/property-type"
+              element={
+                <PropertyTypePage formData={formData} updateField={updateField} />
+              }
+            />
             <Route path="/ownership" element={<OwnershipPage />} />
             <Route path="/income" element={<IncomePage />} />
             <Route path="/insulation" element={<InsulationPage />} />

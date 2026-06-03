@@ -160,6 +160,7 @@ a:focus {
 }
 
 .govuk-button--start {
+  margin-top: var(--govuk-spacing-3);
   font-size: 24px;
   min-height: 48px;
   padding: 10px var(--govuk-spacing-6);
@@ -200,30 +201,128 @@ a:focus {
   border-color: var(--govuk-error-colour);
 }
 
+/* Start page — generous vertical rhythm for the landing content */
+.start-page {
+  padding-top: var(--govuk-spacing-4);
+}
+
+.start-page .govuk-body-l {
+  margin-bottom: var(--govuk-spacing-6);
+}
+
+.start-page .govuk-body {
+  max-width: 38em;
+  margin-bottom: var(--govuk-spacing-5);
+}
+
 /* Radios */
 .govuk-radios {
   margin-bottom: var(--govuk-spacing-6);
 }
 
 .govuk-radios__item {
-  display: flex;
-  align-items: flex-start;
+  position: relative;
+  display: block;
+  min-height: 40px;
   margin-bottom: var(--govuk-spacing-2);
+  padding-left: 40px;
+  clear: left;
 }
 
+/* The native input is made invisible and sized to cover the custom control,
+   so it remains the keyboard/pointer target while the circle is drawn on the label. */
 .govuk-radios__input {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
   width: 40px;
   height: 40px;
   margin: 0;
-  margin-right: var(--govuk-spacing-2);
+  opacity: 0;
   cursor: pointer;
-  flex-shrink: 0;
 }
 
 .govuk-radios__label {
+  display: inline-block;
+  margin-bottom: 0;
+  padding: 8px 15px 5px;
   font-size: 19px;
-  padding-top: 8px;
   cursor: pointer;
+  touch-action: manipulation;
+}
+
+/* Outer circle */
+.govuk-radios__label::before {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  background: transparent;
+}
+
+/* Inner dot (shown when checked) */
+.govuk-radios__label::after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 0;
+  height: 0;
+  border: 10px solid currentColor;
+  border-radius: 50%;
+  opacity: 0;
+  background: currentColor;
+}
+
+.govuk-radios__input:checked + .govuk-radios__label::after {
+  opacity: 1;
+}
+
+.govuk-radios__input:focus + .govuk-radios__label::before {
+  border-width: 4px;
+  outline: 3px solid transparent;
+  outline-offset: 1px;
+  box-shadow: 0 0 0 4px var(--govuk-focus-colour);
+}
+
+.govuk-radios__input:disabled,
+.govuk-radios__input:disabled + .govuk-radios__label {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.govuk-radios__hint {
+  display: block;
+  padding-right: 15px;
+  padding-left: 15px;
+  font-size: 16px;
+  color: var(--govuk-dark-grey);
+}
+
+.govuk-radios__divider {
+  width: 40px;
+  margin-bottom: var(--govuk-spacing-2);
+  color: var(--govuk-black);
+  text-align: center;
+}
+
+/* Inline variant */
+.govuk-radios--inline .govuk-radios__item {
+  display: inline-block;
+  margin-right: var(--govuk-spacing-4);
+}
+
+/* Hint */
+.govuk-hint {
+  font-size: 19px;
+  color: var(--govuk-dark-grey);
+  margin-bottom: var(--govuk-spacing-4);
 }
 
 /* Error messages */
@@ -312,13 +411,16 @@ a:focus {
 /* Back link */
 .govuk-back-link {
   display: inline-block;
-  margin-bottom: var(--govuk-spacing-4);
+  margin-top: var(--govuk-spacing-4);
+  margin-bottom: var(--govuk-spacing-6);
   color: var(--govuk-black);
   font-size: 16px;
 }
 
 .govuk-back-link::before {
-  content: "\2039 ";
+  content: "\2039";
+  display: inline-block;
+  margin-right: var(--govuk-spacing-1);
 }
 
 /* Visually hidden (for screen readers) */
@@ -350,6 +452,24 @@ a:focus {
   padding: 0;
   margin: 0;
   min-width: 0;
+}
+
+.govuk-fieldset__legend {
+  padding: 0;
+  margin-bottom: var(--govuk-spacing-3);
+  font-weight: 700;
+}
+
+.govuk-fieldset__legend--l {
+  font-size: 36px;
+  line-height: 1.04;
+}
+
+.govuk-fieldset__heading {
+  margin: 0;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
 }
 
 /* Responsive */
