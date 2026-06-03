@@ -42,7 +42,12 @@ function App() {
               }
             />
             <Route path="/ownership" element={<OwnershipPage />} />
-            <Route path="/income" element={<IncomePage />} />
+            <Route
+              path="/income"
+              element={
+                <IncomePage formData={formData} updateField={updateField} />
+              }
+            />
             <Route path="/insulation" element={<InsulationPage />} />
             <Route path="/heating" element={<HeatingPage />} />
             <Route path="/check-answers" element={<CheckAnswersPage />} />
