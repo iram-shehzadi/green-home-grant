@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Green Home Grant — Hackathon Mission Control</title>
+<style>
+  :root {
+    --blue: #1d70b8;
+    --blue-dark: #003078;
+    --green: #00703c;
+    --red: #d4351c;
+    --yellow: #ffdd00;
+    --black: #0b0c0c;
+    --white: #ffffff;
+    --light-grey: #f3f2f1;
+    --mid-grey: #b1b4b6;
+    --dark-grey: #505a5f;
+    --purple: #4c2c92;
+    --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --s1: 5px; --s2: 10px; --s3: 15px; --s4: 20px; --s5: 30px; --s6: 40px; --s7: 60px;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    font-family: var(--font);
+    color: var(--black);
+    background: var(--white);
+    margin: 0;
+    line-height: 1.5;
+    font-size: 19px;
+  }
+  /* Skip link */
+  .skip-link {
+    position: absolute; left: -9999px; top: 0;
+    background: var(--yellow); color: var(--black);
+    padding: var(--s2) var(--s3); font-weight: 700; z-index: 100;
+  }
+  .skip-link:focus { left: 0; outline: 3px solid var(--black); }
+
+  /* Focus — visible everywhere */
+  a:focus, button:focus, input:focus, select:focus, summary:focus, [tabindex]:focus {
+    outline: 3px solid var(--yellow);
+    outline-offset: 0;
+    box-shadow: 0 -2px var(--yellow), 0 4px var(--black);
+    background-color: var(--yellow);
+    color: var(--black);
+    text-decoration: none;
+  }
+  select:focus, input:focus { box-shadow: inset 0 0 0 2px var(--black); background-color: var(--white); }
+
+  /* Masthead */
+  header.masthead {
+    background: var(--black);
+    color: var(--white);
+    border-bottom: 10px solid var(--blue);
+    padding: var(--s4) 0;
+  }
+  .container { max-width: 1020px; margin: 0 auto; padding: 0 var(--s3); }
+  .masthead .tag {
+    display: inline-block; background: var(--blue); color: var(--white);
+    font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+    padding: 4px 10px; border-radius: 3px; margin-bottom: var(--s2);
+  }
+  .masthead h1 { font-size: clamp(32px, 6vw, 53px); line-height: 1.05; margin: 0 0 var(--s2); font-weight: 700; }
+  .masthead p { font-size: clamp(18px, 3vw, 24px); margin: 0; color: #dfe3e6; max-width: 40ch; }
+
+  /* Layout */
+  main { padding: var(--s6) 0 var(--s7); }
+  section { margin-bottom: var(--s7); scroll-margin-top: var(--s4); }
+  h2 { font-size: clamp(27px, 4vw, 36px); font-weight: 700; line-height: 1.1; margin: 0 0 var(--s2); padding-bottom: var(--s2); border-bottom: 2px solid var(--blue); }
+  h3 { font-size: clamp(21px, 3vw, 24px); font-weight: 700; margin: var(--s5) 0 var(--s2); }
+  h4 { font-size: 19px; font-weight: 700; margin: var(--s3) 0 var(--s1); }
+  p, li { font-size: 19px; }
+  .lead { font-size: 22px; color: var(--dark-grey); max-width: 60ch; }
+  a { color: var(--blue); }
+  a:hover { color: var(--blue-dark); }
+  code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace; background: var(--light-grey); padding: 1px 5px; border-radius: 3px; font-size: 0.92em; }
+  pre { background: var(--black); color: #e8f0ff; padding: var(--s4); border-radius: 6px; overflow-x: auto; font-size: 15px; line-height: 1.5; }
+  pre code { background: none; color: inherit; padding: 0; }
+
+  /* Section number badge */
+  .secnum { display:inline-flex; align-items:center; justify-content:center; width: 34px; height: 34px; border-radius: 50%; background: var(--blue); color: var(--white); font-size: 18px; font-weight: 700; margin-right: var(--s2); vertical-align: middle; }
+
+  /* Nav rail */
+  nav.toc { background: var(--light-grey); border-left: 5px solid var(--blue); padding: var(--s3) var(--s4); margin-bottom: var(--s6); }
+  nav.toc strong { display:block; margin-bottom: var(--s2); font-size: 16px; text-transform: uppercase; letter-spacing: .5px; color: var(--dark-grey); }
+  nav.toc ol { margin: 0; padding-left: var(--s4); columns: 2; column-gap: var(--s5); }
+  nav.toc li { margin-bottom: 4px; break-inside: avoid; }
+
+  /* Cards / grid */
+  .grid { display: grid; gap: var(--s4); }
+  .grid-2 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+  .grid-3 { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+  .card { background: var(--white); border: 1px solid var(--mid-grey); border-radius: 8px; padding: var(--s4); }
+  .card h4 { margin-top: 0; }
+  .card.accent { border-top: 5px solid var(--blue); }
+  .card .src { font-size: 15px; }
+
+  /* Callouts */
+  .callout { padding: var(--s3) var(--s4); border-radius: 6px; margin: var(--s4) 0; }
+  .callout.info { background: #e8f1f8; border-left: 5px solid var(--blue); }
+  .callout.warn { background: #fef7e0; border-left: 5px solid #f47738; }
+  .callout.good { background: #e9f3ec; border-left: 5px solid var(--green); }
+  .callout strong { font-weight: 700; }
+
+  /* MVP checklist */
+  .mvp { list-style: none; padding: 0; margin: 0; }
+  .mvp li { display: flex; align-items: flex-start; gap: var(--s2); padding: var(--s2) 0; border-bottom: 1px solid var(--light-grey); }
+  .mvp .badge { flex: 0 0 auto; background: var(--green); color: #fff; font-size: 13px; font-weight: 700; padding: 2px 8px; border-radius: 3px; margin-top: 2px; white-space: nowrap; }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; margin: var(--s3) 0; }
+  th, td { text-align: left; padding: var(--s2) var(--s3); border-bottom: 1px solid var(--mid-grey); font-size: 17px; vertical-align: top; }
+  th { border-bottom: 2px solid var(--black); }
+  .pill { display:inline-block; font-size: 13px; font-weight:700; padding: 2px 8px; border-radius: 12px; color:#fff; }
+  .pill.elig { background: var(--green); }
+  .pill.part { background: #f47738; }
+  .pill.no { background: var(--red); }
+
+  /* Form controls */
+  label.fld { display:block; font-weight: 700; margin-bottom: var(--s1); }
+  input[type=text] { font-family: var(--font); font-size: 18px; padding: 8px 10px; border: 2px solid var(--black); border-radius: 0; width: 100%; max-width: 320px; }
+  select { font-family: var(--font); font-size: 18px; padding: 7px 8px; border: 2px solid var(--black); border-radius: 0; background: var(--white); min-width: 160px; }
+  .strategy-opt { border: 2px solid var(--mid-grey); border-radius: 6px; padding: var(--s3) var(--s4); margin-bottom: var(--s3); cursor: pointer; display:block; }
+  .strategy-opt:hover { border-color: var(--blue); }
+  .strategy-opt input { margin-right: var(--s2); transform: scale(1.4); accent-color: var(--blue); }
+  .strategy-opt.selected { border-color: var(--blue); border-width: 4px; padding: calc(var(--s3) - 2px) calc(var(--s4) - 2px); background: #f5f9fc; }
+  .strategy-opt .name { font-weight: 700; font-size: 20px; }
+  .strategy-opt .pros { font-size: 16px; color: var(--dark-grey); margin: var(--s1) 0 0; }
+  .chk { display:flex; align-items:flex-start; gap: var(--s2); padding: var(--s2); border:1px solid var(--mid-grey); border-radius:4px; margin-bottom: var(--s2); }
+  .chk input { transform: scale(1.4); accent-color: var(--blue); margin-top: 4px; }
+  .chk label { font-weight: 400; }
+  .chk .gname { font-weight: 700; }
+
+  /* Task board */
+  .task-row { display: grid; grid-template-columns: 1fr 170px 70px; gap: var(--s2); align-items: center; padding: var(--s2) 0; border-bottom: 1px solid var(--light-grey); }
+  .task-row .tlabel { font-size: 17px; }
+  .workstream-head { font-weight:700; background: var(--light-grey); padding: var(--s2) var(--s3); margin-top: var(--s3); border-radius: 4px; }
+
+  /* Buttons */
+  .btn { font-family: var(--font); font-size: 19px; font-weight: 700; color: #fff; background: var(--green); border: 2px solid transparent; box-shadow: 0 2px 0 #002d18; padding: 10px 18px; border-radius: 4px; cursor: pointer; }
+  .btn:hover { background: #005a30; }
+  .btn:active { top: 2px; box-shadow: none; }
+  .btn.secondary { background: var(--white); color: var(--blue); border-color: var(--blue); box-shadow: 0 2px 0 var(--blue-dark); }
+  .btn.secondary:hover { background: var(--light-grey); }
+
+  textarea#jsonOut { width: 100%; min-height: 320px; font-family: "SFMono-Regular", Consolas, monospace; font-size: 14px; padding: var(--s3); border: 2px solid var(--black); border-radius: 6px; background: #1b1b2f; color: #d7e3ff; }
+
+  .toolbar { display:flex; gap: var(--s2); flex-wrap: wrap; align-items:center; margin: var(--s3) 0; }
+  .status { font-size: 16px; color: var(--green); font-weight: 700; }
+
+  footer.foot { border-top: 1px solid var(--mid-grey); padding: var(--s5) 0; color: var(--dark-grey); font-size: 16px; }
+
+  @media (max-width: 640px) {
+    nav.toc ol { columns: 1; }
+    .task-row { grid-template-columns: 1fr; gap: 4px; }
+    .masthead h1 { font-size: 32px; }
+  }
+  @media print { .no-print { display:none; } pre, .card { break-inside: avoid; } }
+</style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<header class="masthead">
+  <div class="container">
+    <span class="tag">Hackathon Mission Control</span>
+    <h1>Green Home Grant — Plan to Win</h1>
+    <p>A 2-day, 4-person playbook for shipping a GOV.UK-standard eligibility service. Read it, divide the work, export your decisions.</p>
+  </div>
+</header>
+
+<main id="main" class="container">
+
+  <nav class="toc no-print" aria-label="Contents">
+    <strong>On this page</strong>
+    <ol>
+      <li><a href="#overview">Overview &amp; MVP floor</a></li>
+      <li><a href="#architecture">Architecture decisions</a></li>
+      <li><a href="#patterns">GOV.UK pattern reference</a></li>
+      <li><a href="#eligibility">Eligibility ruleset</a></li>
+      <li><a href="#team">Your team</a></li>
+      <li><a href="#strategy">Work-division strategy</a></li>
+      <li><a href="#tasks">Task board</a></li>
+      <li><a href="#stretch">Stretch goals</a></li>
+      <li><a href="#ailog">AI_LOG plan</a></li>
+      <li><a href="#export">Generate JSON</a></li>
+    </ol>
+  </nav>
+
+  <!-- 1. OVERVIEW -->
+  <section id="overview">
+    <h2><span class="secnum" aria-hidden="true">1</span>Overview &amp; the MVP floor</h2>
+    <p class="lead">Build a digital service that replaces a 35-minute eligibility phone call. Citizens answer 5 questions, one per page, and learn instantly whether they qualify for the Green Home Grant, what for, and what to do next.</p>
+    <div class="callout warn"><strong>Win condition:</strong> judges reward a <em>clean, complete, accessible</em> service over a flashy incomplete one. Ship the six floor items below first — then build outward. Document your AI use as you go, not at the end.</div>
+    <h3>The six mandatory items (the floor)</h3>
+    <ul class="mvp">
+      <li><span class="badge">MVP 1</span><span><strong>Multi-page question flow</strong> — start page → 5+ question pages, one thing per page.</span></li>
+      <li><span class="badge">MVP 2</span><span><strong>Check-your-answers</strong> — summary list with a “Change” link for every answer.</span></li>
+      <li><span class="badge">MVP 3</span><span><strong>Result page</strong> — clear outcome: eligible / partial / not eligible.</span></li>
+      <li><span class="badge">MVP 4</span><span><strong>GOV.UK components</strong> — correct typography, spacing, heading hierarchy (use the existing <code>App.css</code> classes).</span></li>
+      <li><span class="badge">MVP 5</span><span><strong>WCAG 2.2 AA</strong> — labelled inputs, keyboard nav, 4.5:1 contrast, visible focus.</span></li>
+      <li><span class="badge">MVP 6</span><span><strong>AI usage log</strong> — <code>AI_LOG.md</code>, 3+ entries, 4 fields each, varied patterns.</span></li>
+    </ul>
+  </section>
+
+  <!-- 2. ARCHITECTURE -->
+  <section id="architecture">
+    <h2><span class="secnum" aria-hidden="true">2</span>Architecture decisions (and the why)</h2>
+    <p>The starter already has all 9 page routes, working router, and GOV.UK CSS. Lock these four decisions before anyone writes a feature — they kill the two failure modes that sink hackathon teams.</p>
+    <div class="grid grid-2">
+      <div class="card accent">
+        <h4>1. One state object, lifted to <code>App.jsx</code></h4>
+        <p>Hold a single <code>formData</code> object in <code>useState</code> at the top of <code>App.jsx</code>; pass it and an <code>updateField(key, value)</code> callback down to each page via props.</p>
+        <p class="src"><strong>Why:</strong> the #1 hackathon failure is “form state lost between pages.” One source of truth fixes it for good.</p>
+      </div>
+      <div class="card accent">
+        <h4>2. Eligibility = a pure function</h4>
+        <p>Put the logic in <code>src/utils/eligibility.js</code> — input: <code>formData</code>, output: a result object. No React inside it.</p>
+        <p class="src"><strong>Why:</strong> testable without rendering. This is how you hit “5+ unit tests” cheaply and how you keep logic out of components.</p>
+      </div>
+      <div class="card accent">
+        <h4>3. Reuse the CSS — don’t write new CSS</h4>
+        <p>Use <code>govuk-heading-xl</code>, <code>govuk-body</code>, <code>govuk-button</code>, <code>govuk-radios</code>, <code>govuk-form-group--error</code>, etc. They’re already in <code>App.css</code>.</p>
+        <p class="src"><strong>Why:</strong> custom CSS burns time and breaks contrast/spacing compliance. The scale is already correct.</p>
+      </div>
+      <div class="card accent">
+        <h4>4. Mount what’s already built</h4>
+        <p><code>PhaseBanner</code> and <code>GovukFooter</code> exist but aren’t mounted. Add them to the layout in <code>App.jsx</code>. Footer links to the accessibility statement.</p>
+        <p class="src"><strong>Why:</strong> free marks — phase banner + footer signal GOV.UK fluency to judges.</p>
+      </div>
+    </div>
+    <div class="callout good"><strong>Architecture contract (agree this out loud before splitting):</strong> answer keys are <code>propertyType, ownership, income, insulation, heating</code>; each is a string from the option list in §4; <code>updateField</code> is the only way to mutate state; navigation uses <code>useNavigate</code> with the existing routes.</div>
+  </section>
+
+  <!-- 3. PATTERNS -->
+  <section id="patterns">
+    <h2><span class="secnum" aria-hidden="true">3</span>GOV.UK pattern reference</h2>
+    <p>The patterns the judges will check against. Links go to the official Design System.</p>
+    <div class="grid grid-2">
+      <div class="card">
+        <h4>Start page</h4>
+        <p>Title, short description of what the service does + who it’s for, and a green <code>govuk-button--start</code> “Start now” linking into the flow. Keep eligibility questions <em>out</em> of the start page.</p>
+        <p class="src"><a href="https://design-system.service.gov.uk/patterns/start-using-a-service/" target="_blank" rel="noopener">Start using a service ↗</a></p>
+      </div>
+      <div class="card">
+        <h4>One thing per page (question pages)</h4>
+        <p>The question <em>is</em> the page <code>&lt;h1&gt;</code>, set via the <code>&lt;legend&gt;</code> (radios) or <code>&lt;label&gt;</code> so screen readers hear it once. A <strong>back link</strong> at the top; a left-aligned <strong>“Continue”</strong> button (not “Next”). Offer “I do not know” where it’s honest.</p>
+        <p class="src"><a href="https://design-system.service.gov.uk/patterns/question-pages/" target="_blank" rel="noopener">Question pages ↗</a> · <a href="https://design-system.service.gov.uk/components/radios/" target="_blank" rel="noopener">Radios ↗</a></p>
+      </div>
+      <div class="card">
+        <h4>Check answers</h4>
+        <p><code>govuk-summary-list</code> with key / value / action rows. Every row’s “Change” link has visually-hidden text naming the field (<code>&lt;span class="govuk-visually-hidden"&gt;property type&lt;/span&gt;</code>). Final button: <strong>“Accept and continue”</strong>. Change links return the user to that question with the value pre-filled.</p>
+        <p class="src"><a href="https://design-system.service.gov.uk/patterns/check-answers/" target="_blank" rel="noopener">Check answers ↗</a> · <a href="https://design-system.service.gov.uk/components/summary-list/" target="_blank" rel="noopener">Summary list ↗</a></p>
+      </div>
+      <div class="card">
+        <h4>Validation &amp; errors</h4>
+        <p>On error: prefix the page <code>&lt;title&gt;</code> with “Error: ”, show an <strong>error summary</strong> (<code>role="alert"</code>, “There is a problem”, focus it on load) linking to each bad field, plus an <strong>inline error</strong> next to the field with the <em>same wording</em>. Use <code>govuk-form-group--error</code>.</p>
+        <p class="src"><a href="https://design-system.service.gov.uk/components/error-summary/" target="_blank" rel="noopener">Error summary ↗</a> · <a href="https://design-system.service.gov.uk/components/error-message/" target="_blank" rel="noopener">Error message ↗</a></p>
+      </div>
+      <div class="card">
+        <h4>Result / confirmation</h4>
+        <p>A clear outcome up top. For “eligible” use a green <code>govuk-panel</code>; for partial/not-eligible state it plainly and explain <em>why</em> and <em>what to do next</em>. Never rely on colour alone — back it with text.</p>
+        <p class="src"><a href="https://design-system.service.gov.uk/components/panel/" target="_blank" rel="noopener">Panel ↗</a></p>
+      </div>
+      <div class="card">
+        <h4>Typography, spacing &amp; 320px</h4>
+        <p>GDS font stack, <code>xl/l/m</code> heading scale, 5px spacing increments — all in <code>App.css</code>. Test at 320px width: no horizontal scroll, tap targets ≥ 44px, focus visible on every control.</p>
+        <p class="src"><a href="https://design-system.service.gov.uk/styles/type-scale/" target="_blank" rel="noopener">Type scale ↗</a> · <a href="https://design-system.service.gov.uk/styles/spacing/" target="_blank" rel="noopener">Spacing ↗</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. ELIGIBILITY -->
+  <section id="eligibility">
+    <h2><span class="secnum" aria-hidden="true">4</span>Eligibility ruleset (concrete &amp; testable)</h2>
+    <p>A deterministic ruleset wired to the existing page stubs. This is your spec for <code>src/utils/eligibility.js</code> and your unit tests. Tweak the thresholds if you like — keep it pure.</p>
+
+    <h3>The 5 questions &amp; answer keys</h3>
+    <table>
+      <thead><tr><th>Key</th><th>Question</th><th>Options (value)</th></tr></thead>
+      <tbody>
+        <tr><td><code>propertyType</code></td><td>Property type</td><td>house · bungalow · flat · maisonette · other</td></tr>
+        <tr><td><code>ownership</code></td><td>Ownership status</td><td>own · private-rent · housing-association · council</td></tr>
+        <tr><td><code>income</code></td><td>Household income band</td><td>under-31000 · 31000-50000 · over-50000</td></tr>
+        <tr><td><code>insulation</code></td><td>Existing insulation</td><td>both · wall · loft · none · dont-know</td></tr>
+        <tr><td><code>heating</code></td><td>Main heating system</td><td>gas · oil · electric · heat-pump · other</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Decision logic</h3>
+    <pre><code>export function checkEligibility({ propertyType, ownership, income, insulation, heating }) {
+  // 1. Gate — private renters must apply via their landlord
+  if (ownership === 'private-rent')
+    return { outcome: 'not-eligible', funds: [], reasons: ['landlord-must-apply'] };
+
+  // 2. What could be funded
+  const needsInsulation   = insulation !== 'both';
+  const insulationUnknown = insulation === 'dont-know';
+  const canHeatPump       = heating !== 'heat-pump' && propertyType !== 'flat'; // flats: no external unit
+  const funds = [];
+  if (needsInsulation) funds.push('insulation');
+  if (canHeatPump)     funds.push('heat-pump');
+
+  // 3. Nothing left to fund
+  if (funds.length === 0)
+    return { outcome: 'not-eligible', funds: [], reasons: ['already-efficient'] };
+
+  // 4. Income sets the funding level
+  if (income === 'under-31000')
+    return { outcome: 'eligible', funds, fundingLevel: 'full', survey: insulationUnknown };
+
+  if (income === '31000-50000')
+    return { outcome: 'partial', funds, fundingLevel: 'contribution', survey: insulationUnknown };
+
+  // income === 'over-50000' — insulation not funded; heat-pump voucher only
+  if (funds.includes('heat-pump'))
+    return { outcome: 'partial', funds: ['heat-pump'], fundingLevel: 'voucher', survey: false };
+
+  return { outcome: 'not-eligible', funds: [], reasons: ['income-too-high'] };
+}</code></pre>
+
+    <h3>Worked test cases (8 — exceeds the “5 unit tests” bar)</h3>
+    <table>
+      <thead><tr><th>#</th><th>Input (property, ownership, income, insulation, heating)</th><th>Outcome</th><th>Funds / note</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>house, private-rent, under-31000, none, gas</td><td><span class="pill no">not eligible</span></td><td>landlord-must-apply</td></tr>
+        <tr><td>2</td><td>house, own, under-31000, none, gas</td><td><span class="pill elig">eligible</span></td><td>[insulation, heat-pump], full</td></tr>
+        <tr><td>3</td><td>house, own, 31000-50000, loft, oil</td><td><span class="pill part">partial</span></td><td>contribution</td></tr>
+        <tr><td>4</td><td>house, own, over-50000, both, heat-pump</td><td><span class="pill no">not eligible</span></td><td>already-efficient</td></tr>
+        <tr><td>5</td><td>house, own, over-50000, wall, gas</td><td><span class="pill part">partial</span></td><td>[heat-pump], voucher</td></tr>
+        <tr><td>6</td><td>house, own, under-31000, both, heat-pump</td><td><span class="pill no">not eligible</span></td><td>already-efficient</td></tr>
+        <tr><td>7</td><td>flat, own, under-31000, none, gas</td><td><span class="pill elig">eligible</span></td><td>[insulation] only — no heat pump for flats</td></tr>
+        <tr><td>8</td><td>house, own, under-31000, dont-know, gas</td><td><span class="pill elig">eligible</span></td><td>full, survey = true</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 5. TEAM -->
+  <section id="team">
+    <h2><span class="secnum" aria-hidden="true">5</span>Your team</h2>
+    <p>Enter the four names. They populate the owner dropdowns and the exported JSON. (Leave blank to keep the <code>dev1…dev4</code> labels.)</p>
+    <div class="grid grid-2" id="teamInputs">
+      <div><label class="fld" for="name-dev1">Developer 1</label><input type="text" id="name-dev1" data-dev="dev1" placeholder="e.g. Alex" autocomplete="off"></div>
+      <div><label class="fld" for="name-dev2">Developer 2</label><input type="text" id="name-dev2" data-dev="dev2" placeholder="e.g. Priya" autocomplete="off"></div>
+      <div><label class="fld" for="name-dev3">Developer 3</label><input type="text" id="name-dev3" data-dev="dev3" placeholder="e.g. Sam" autocomplete="off"></div>
+      <div><label class="fld" for="name-dev4">Developer 4</label><input type="text" id="name-dev4" data-dev="dev4" placeholder="e.g. Jordan" autocomplete="off"></div>
+    </div>
+  </section>
+
+  <!-- 6. STRATEGY -->
+  <section id="strategy">
+    <h2><span class="secnum" aria-hidden="true">6</span>Work-division strategy</h2>
+    <p>Pick one. Each splits the same work differently — there’s no wrong answer, only a best fit for how your team likes to work.</p>
+    <fieldset style="border:0;padding:0;margin:0;">
+      <legend class="govuk-visually-hidden" style="position:absolute;left:-9999px;">Choose a work-division strategy</legend>
+      <label class="strategy-opt" data-strategy="vertical-slice-then-feature">
+        <input type="radio" name="strategy" value="vertical-slice-then-feature">
+        <span class="name">A · Vertical slice, then feature ownership — Recommended</span>
+        <p class="pros">All four mob one working slice (Start → 1 question → hardcoded result) for ~1 hr to lock the state shape and navigation. Then split: Flow / Logic / Review / Quality. <strong>Best for:</strong> avoiding the “state lost between pages” trap. <strong>Cost:</strong> 1 hr of everyone up front.</p>
+      </label>
+      <label class="strategy-opt" data-strategy="two-pairs">
+        <input type="radio" name="strategy" value="two-pairs">
+        <span class="name">B · Two pairs</span>
+        <p class="pros">Pair A = flow + validation; Pair B = logic + tests + check-answers + result; accessibility &amp; AI_LOG rotate. <strong>Best for:</strong> inexperienced teams — pairing catches bugs early. <strong>Cost:</strong> only two parallel tracks.</p>
+      </label>
+      <label class="strategy-opt" data-strategy="page-ownership">
+        <input type="radio" name="strategy" value="page-ownership">
+        <span class="name">C · Page ownership (simplest)</span>
+        <p class="pros">Each dev owns ~2 pages end-to-end after agreeing the state contract. <strong>Best for:</strong> max parallelism. <strong>Cost:</strong> highest risk of inconsistent state/styling — nail the contract in §2 first.</p>
+      </label>
+    </fieldset>
+    <div class="callout info" id="roleHint">Choose a strategy to see the suggested role split. You can still reassign individual tasks in §7.</div>
+  </section>
+
+  <!-- 7. TASKS -->
+  <section id="tasks">
+    <h2><span class="secnum" aria-hidden="true">7</span>Task board</h2>
+    <p>The full build, grouped by workstream. Assign an owner to each and tick what’s planned for day 1. Owners default to the suggested split for your chosen strategy.</p>
+    <div id="taskBoard"></div>
+  </section>
+
+  <!-- 8. STRETCH -->
+  <section id="stretch">
+    <h2><span class="secnum" aria-hidden="true">8</span>Stretch goals</h2>
+    <p>Only after all six MVP items ship cleanly. Listed in the brief’s recommended priority order — pick what you’ll commit to.</p>
+    <div id="stretchList">
+      <div class="chk"><input type="checkbox" id="st-localstorage" value="localstorage"><label for="st-localstorage"><span class="gname">Save &amp; return with localStorage</span> — persist <code>formData</code> so a refresh doesn’t lose answers. Demonstrates the “redundant entry” 2.2 criterion handled well.</label></div>
+      <div class="chk"><input type="checkbox" id="st-pathway" value="second-pathway"><label for="st-pathway"><span class="gname">Second eligibility pathway</span> — e.g. a fast-track for pension-credit recipients, or a different scheme branch. Shows the logic generalises.</label></div>
+      <div class="chk"><input type="checkbox" id="st-playwright" value="playwright"><label for="st-playwright"><span class="gname">Playwright end-to-end tests</span> — drive the whole flow start → result in a real browser.</label></div>
+      <div class="chk"><input type="checkbox" id="st-axe" value="axe-core"><label for="st-axe"><span class="gname">Automated accessibility check (axe-core)</span> — run axe in a test to back up the WCAG claim with evidence.</label></div>
+    </div>
+    <div class="callout warn"><strong>Discouraged:</strong> cosmetic additions (animations, theming) that don’t demonstrate new capability. Judges reward depth, not decoration.</div>
+  </section>
+
+  <!-- 9. AI LOG -->
+  <section id="ailog">
+    <h2><span class="secnum" aria-hidden="true">9</span>AI_LOG plan</h2>
+    <p>The brief wants <strong>variety</strong> — 3+ entries across 3–5 distinct patterns, not “asked Claude to write X” three times. Assign each pattern to whoever will own that piece of work so the log writes itself.</p>
+    <div id="aiLogBoard" class="grid grid-2"></div>
+    <div class="callout good"><strong>Each entry needs 4 fields:</strong> Date · Task · What AI Generated · What You Changed + Why. The “What You Changed + Why” is where marks live — show judgement, not just copy-paste. Use the seeded <code>AI_LOG.md</code>.</div>
+  </section>
+
+  <!-- 10. EXPORT -->
+  <section id="export">
+    <h2><span class="secnum" aria-hidden="true">10</span>Generate JSON</h2>
+    <p>When your choices are in, generate the deterministic JSON below and paste it back into the Claude chat. I’ll turn it into a tailored per-person execution plan and start scaffolding <code>eligibility.js</code>, the tests, and the state wiring.</p>
+    <div class="toolbar no-print">
+      <button class="btn" id="genBtn" type="button">Generate JSON</button>
+      <button class="btn secondary" id="copyBtn" type="button">Copy to clipboard</button>
+      <span class="status" id="copyStatus" role="status" aria-live="polite"></span>
+    </div>
+    <label class="fld" for="jsonOut">Deterministic output</label>
+    <textarea id="jsonOut" readonly aria-label="Generated JSON output" placeholder="Click “Generate JSON” to produce your plan…"></textarea>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="container">
+    <p>Green Home Grant hackathon mission control · self-contained, no tracking, works offline. Built to GOV.UK design conventions as a working reference for the service you’re about to ship.</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  // ---- Data model -------------------------------------------------------
+  var DEVS = ["dev1", "dev2", "dev3", "dev4"];
+
+  // Workstreams -> tasks. Each task has an id, label, and a default role key.
+  var WORKSTREAMS = [
+    { name: "Flow & state", role: "flow", tasks: [
+      { id: "app-state", label: "Lift formData into App.jsx + updateField callback" },
+      { id: "q-pages", label: "Wire all 5 question pages (radios, value binding, Continue)" },
+      { id: "navigation", label: "Back/Continue navigation with useNavigate across the flow" },
+      { id: "start-page", label: "Start page: title, description, Start now button" }
+    ]},
+    { name: "Eligibility logic", role: "logic", tasks: [
+      { id: "elig-fn", label: "Write src/utils/eligibility.js (pure function)" },
+      { id: "vitest-setup", label: "Add vitest to package.json + config" },
+      { id: "elig-tests", label: "Write 8 unit tests from the worked cases" },
+      { id: "result-page", label: "Result page: render outcome, funds, what-to-do-next" }
+    ]},
+    { name: "Review & validation", role: "review", tasks: [
+      { id: "check-answers", label: "Check-answers page: summary list + Change links" },
+      { id: "validation", label: "Client-side validation: error summary + inline errors" },
+      { id: "error-title", label: "Add 'Error: ' page-title prefix + focus error summary" }
+    ]},
+    { name: "Quality & accessibility", role: "quality", tasks: [
+      { id: "mount-chrome", label: "Mount PhaseBanner + GovukFooter in App.jsx" },
+      { id: "wcag-pass", label: "WCAG 2.2 AA pass: labels, keyboard, contrast, focus" },
+      { id: "responsive-320", label: "Test at 320px — no horizontal scroll" },
+      { id: "a11y-statement", label: "Complete the accessibility statement page" },
+      { id: "ailog-curate", label: "Curate AI_LOG.md — ensure 3+ varied entries" }
+    ]}
+  ];
+
+  // Suggested role -> dev mapping per strategy.
+  var STRATEGY_ROLES = {
+    "vertical-slice-then-feature": { flow: "dev1", logic: "dev2", review: "dev3", quality: "dev4" },
+    // Two pairs: dev1+dev2 = flow & validation; dev3+dev4 = logic & outcome
+    "two-pairs": { flow: "dev1", review: "dev2", logic: "dev3", quality: "dev4" },
+    // Page ownership: spread evenly
+    "page-ownership": { flow: "dev1", logic: "dev2", review: "dev3", quality: "dev4" }
+  };
+
+  var AILOG_PATTERNS = [
+    { id: "planning", label: "Planning", hint: "Using plan mode to scope the build before coding" },
+    { id: "plan-mode-scaffolding", label: "Plan-mode scaffolding", hint: "Generating file/route skeletons from a plan" },
+    { id: "multi-agent-critique", label: "Multi-agent critique", hint: "Having one agent review another's output" },
+    { id: "refactor", label: "Refactor", hint: "Extracting/restructuring existing code" },
+    { id: "test-generation", label: "Test generation", hint: "Generating unit tests from the ruleset" }
+  ];
+
+  // ---- State ------------------------------------------------------------
+  var state = {
+    strategy: "vertical-slice-then-feature",
+    names: { dev1: "", dev2: "", dev3: "", dev4: "" },
+    taskOwners: {},      // taskId -> devId
+    taskPlanned: {},     // taskId -> bool
+    stretch: {},         // goalId -> bool
+    aiLog: {}            // patternId -> devId
+  };
+
+  function devLabel(devId) {
+    var n = state.names[devId];
+    return n && n.trim() ? n.trim() : devId;
+  }
+
+  function ownerOptions(selected) {
+    return DEVS.map(function (d) {
+      var sel = d === selected ? " selected" : "";
+      return '<option value="' + d + '"' + sel + '>' + escapeHtml(devLabel(d)) + "</option>";
+    }).join("");
+  }
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c];
+    });
+  }
+
+  // ---- Defaults ---------------------------------------------------------
+  function applyStrategyDefaults() {
+    var roleMap = STRATEGY_ROLES[state.strategy] || {};
+    WORKSTREAMS.forEach(function (ws) {
+      var owner = roleMap[ws.role] || "dev1";
+      ws.tasks.forEach(function (t) {
+        state.taskOwners[t.id] = owner; // reset to suggested split on strategy change
+      });
+    });
+  }
+
+  // ---- Renderers --------------------------------------------------------
+  function renderTaskBoard() {
+    var html = "";
+    WORKSTREAMS.forEach(function (ws) {
+      html += '<div class="workstream-head">' + escapeHtml(ws.name) + "</div>";
+      ws.tasks.forEach(function (t) {
+        html += '<div class="task-row">';
+        html += '<div class="tlabel">' + escapeHtml(t.label) + "</div>";
+        html += '<div><label class="govuk-visually-hidden" for="owner-' + t.id + '">Owner for ' + escapeHtml(t.label) + '</label>';
+        html += '<select id="owner-' + t.id + '" data-task="' + t.id + '">' + ownerOptions(state.taskOwners[t.id]) + "</select></div>";
+        var checked = state.taskPlanned[t.id] ? " checked" : "";
+        html += '<div><input type="checkbox" data-plan="' + t.id + '" id="plan-' + t.id + '"' + checked + ' style="transform:scale(1.4);accent-color:var(--blue);">';
+        html += '<label class="govuk-visually-hidden" for="plan-' + t.id + '">Plan ' + escapeHtml(t.label) + ' for day 1</label></div>';
+        html += "</div>";
+      });
+    });
+    document.getElementById("taskBoard").innerHTML = html;
+  }
+
+  function renderAiLog() {
+    var html = "";
+    AILOG_PATTERNS.forEach(function (p) {
+      html += '<div class="card"><h4>' + escapeHtml(p.label) + "</h4>";
+      html += '<p class="src">' + escapeHtml(p.hint) + "</p>";
+      html += '<label class="fld" for="ai-' + p.id + '">Owner</label>';
+      html += '<select id="ai-' + p.id + '" data-ai="' + p.id + '">';
+      html += '<option value="">— unassigned —</option>' + ownerOptions(state.aiLog[p.id] || "");
+      html += "</select></div>";
+    });
+    document.getElementById("aiLogBoard").innerHTML = html;
+  }
+
+  function refreshOwnerSelects() {
+    // Re-render labels in all owner dropdowns when names change, preserving selection.
+    document.querySelectorAll("select[data-task]").forEach(function (sel) {
+      sel.innerHTML = ownerOptions(state.taskOwners[sel.getAttribute("data-task")]);
+    });
+    document.querySelectorAll("select[data-ai]").forEach(function (sel) {
+      var cur = state.aiLog[sel.getAttribute("data-ai")] || "";
+      sel.innerHTML = '<option value="">— unassigned —</option>' + ownerOptions(cur);
+    });
+  }
+
+  function renderStrategyHint() {
+    var hints = {
+      "vertical-slice-then-feature": "Flow → " + devLabel(STRATEGY_ROLES["vertical-slice-then-feature"].flow) + " · Logic → " + devLabel("dev2") + " · Review → " + devLabel("dev3") + " · Quality → " + devLabel("dev4") + ". Everyone mobs the first slice together before splitting.",
+      "two-pairs": "Pair A (" + devLabel("dev1") + " + " + devLabel("dev2") + ") = flow & validation · Pair B (" + devLabel("dev3") + " + " + devLabel("dev4") + ") = logic, tests, check-answers & result.",
+      "page-ownership": "Each owns ~2 pages end-to-end after agreeing the §2 state contract: " + devLabel("dev1") + ", " + devLabel("dev2") + ", " + devLabel("dev3") + ", " + devLabel("dev4") + "."
+    };
+    document.getElementById("roleHint").textContent = hints[state.strategy] || "";
+  }
+
+  function markSelectedStrategy() {
+    document.querySelectorAll(".strategy-opt").forEach(function (el) {
+      el.classList.toggle("selected", el.getAttribute("data-strategy") === state.strategy);
+    });
+  }
+
+  // ---- Deterministic JSON ----------------------------------------------
+  // Stable: keys sorted recursively, arrays sorted, no timestamps/random.
+  function sortValue(v) {
+    if (Array.isArray(v)) return v.map(sortValue);
+    if (v && typeof v === "object") {
+      return Object.keys(v).sort().reduce(function (acc, k) {
+        acc[k] = sortValue(v[k]);
+        return acc;
+      }, {});
+    }
+    return v;
+  }
+
+  function buildOutput() {
+    // assignments: devId -> { role, name, tasks: [sorted] }
+    var roleMap = STRATEGY_ROLES[state.strategy] || {};
+    var roleByDev = {};
+    Object.keys(roleMap).forEach(function (role) { roleByDev[roleMap[role]] = role; });
+
+    var assignments = {};
+    DEVS.forEach(function (d) {
+      assignments[d] = { name: devLabel(d), role: roleByDev[d] || "", tasks: [] };
+    });
+    Object.keys(state.taskOwners).forEach(function (taskId) {
+      var owner = state.taskOwners[taskId];
+      if (assignments[owner]) assignments[owner].tasks.push(taskId);
+    });
+    DEVS.forEach(function (d) { assignments[d].tasks.sort(); });
+
+    var plannedDay1 = Object.keys(state.taskPlanned).filter(function (k) { return state.taskPlanned[k]; }).sort();
+
+    var stretchGoals = Object.keys(state.stretch).filter(function (k) { return state.stretch[k]; }).sort();
+
+    var aiLogPlan = {};
+    DEVS.forEach(function (d) { aiLogPlan[d] = []; });
+    Object.keys(state.aiLog).forEach(function (patternId) {
+      var owner = state.aiLog[patternId];
+      if (owner && aiLogPlan[owner]) aiLogPlan[owner].push(patternId);
+    });
+    DEVS.forEach(function (d) { aiLogPlan[d].sort(); });
+
+    var out = {
+      schemaVersion: "1.0",
+      aiLogPlan: aiLogPlan,
+      assignments: assignments,
+      eligibilityRuleset: "concrete-v1",
+      plannedDay1: plannedDay1,
+      strategy: state.strategy,
+      stretchGoals: stretchGoals,
+      team: { members: DEVS.map(function (d) { return { id: d, name: devLabel(d) }; }) }
+    };
+    return JSON.stringify(sortValue(out), null, 2);
+  }
+
+  // ---- Wiring -----------------------------------------------------------
+  function init() {
+    applyStrategyDefaults();
+    renderTaskBoard();
+    renderAiLog();
+    markSelectedStrategy();
+    renderStrategyHint();
+
+    // Pre-select default strategy radio
+    var defRadio = document.querySelector('input[name="strategy"][value="' + state.strategy + '"]');
+    if (defRadio) defRadio.checked = true;
+
+    // Names
+    document.querySelectorAll("#teamInputs input[data-dev]").forEach(function (inp) {
+      inp.addEventListener("input", function () {
+        state.names[inp.getAttribute("data-dev")] = inp.value;
+        refreshOwnerSelects();
+        renderStrategyHint();
+      });
+    });
+
+    // Strategy
+    document.querySelectorAll('input[name="strategy"]').forEach(function (r) {
+      r.addEventListener("change", function () {
+        if (r.checked) {
+          state.strategy = r.value;
+          applyStrategyDefaults();
+          renderTaskBoard();
+          markSelectedStrategy();
+          renderStrategyHint();
+        }
+      });
+    });
+
+    // Task board (delegated)
+    document.getElementById("taskBoard").addEventListener("change", function (e) {
+      var t = e.target;
+      if (t.matches("select[data-task]")) state.taskOwners[t.getAttribute("data-task")] = t.value;
+      if (t.matches("input[data-plan]")) state.taskPlanned[t.getAttribute("data-plan")] = t.checked;
+    });
+
+    // AI log (delegated)
+    document.getElementById("aiLogBoard").addEventListener("change", function (e) {
+      var t = e.target;
+      if (t.matches("select[data-ai]")) state.aiLog[t.getAttribute("data-ai")] = t.value;
+    });
+
+    // Stretch goals
+    document.getElementById("stretchList").addEventListener("change", function (e) {
+      var t = e.target;
+      if (t.matches('input[type="checkbox"]')) state.stretch[t.value] = t.checked;
+    });
+
+    // Generate / copy
+    document.getElementById("genBtn").addEventListener("click", function () {
+      document.getElementById("jsonOut").value = buildOutput();
+      document.getElementById("copyStatus").textContent = "Generated.";
+    });
+    document.getElementById("copyBtn").addEventListener("click", function () {
+      var ta = document.getElementById("jsonOut");
+      if (!ta.value) ta.value = buildOutput();
+      ta.select();
+      var ok = false;
+      try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(ta.value).then(function () {
+          document.getElementById("copyStatus").textContent = "Copied to clipboard.";
+        }, function () {
+          document.getElementById("copyStatus").textContent = ok ? "Copied." : "Press Ctrl/Cmd+C to copy.";
+        });
+      } else {
+        document.getElementById("copyStatus").textContent = ok ? "Copied." : "Press Ctrl/Cmd+C to copy.";
+      }
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+})();
+</script>
+</body>
+</html>
