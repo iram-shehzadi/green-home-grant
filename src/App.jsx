@@ -44,7 +44,12 @@ function App() {
             <Route path="/ownership" element={<OwnershipPage />} />
             <Route path="/income" element={<IncomePage />} />
             <Route path="/insulation" element={<InsulationPage />} />
-            <Route path="/heating" element={<HeatingPage />} />
+            <Route
+              path="/heating"
+              element={
+                <HeatingPage formData={formData} updateField={updateField} />
+              }
+            />
             <Route path="/check-answers" element={<CheckAnswersPage />} />
             <Route path="/result" element={<ResultPage />} />
             <Route path="/accessibility-statement" element={<AccessibilityStatementPage />} />
