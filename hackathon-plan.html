@@ -325,10 +325,10 @@ Citizens answer 5 questions (one per page) and get an instant eligibility result
 ## Question-page pattern
 Copy `src/pages/PropertyTypePage.jsx` — it is the reference. Every question page MUST:
 - show a back link at the top that returns to the previous route
-- put the question text in an <h1> INSIDE the <legend> (screen readers hear it once)
+- put the question text in an &lt;h1&gt; INSIDE the &lt;legend&gt; (screen readers hear it once)
 - render options with the govuk-radios classes, bound to formData via updateField
 - on Continue: if no answer is selected, show the error summary (and focus it),
-  show an inline error with the SAME wording, and prefix the page <title> with "Error: "
+  show an inline error with the SAME wording, and prefix the page &lt;title&gt; with "Error: "
 - on a valid answer, navigate to the next route
 
 ## Eligibility contract
