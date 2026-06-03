@@ -1,19 +1,33 @@
-// TODO: Import useNavigate from react-router-dom
-// TODO: Import GovukButton
+import { useNavigate } from 'react-router-dom';
+import GovukButton from '../components/GovukButton';
 
 function StartPage() {
-  // TODO: Add navigation to /property-type on button click
+  const navigate = useNavigate();
 
   return (
-    <>
+    <div className="start-page">
       <h1 className="govuk-heading-xl">
         Check if you can get a Green Home Grant
       </h1>
       <p className="govuk-body-l">
-        {/* TODO: Add a description of the service */}
+        Use this service to find out if you qualify for help to make your home
+        more energy efficient, what improvements could be funded, and what to do
+        next.
       </p>
-      {/* TODO: Add a "Start now" button using GovukButton with variant="start" */}
-    </>
+      <p className="govuk-body">
+        It takes around 5 minutes. You will be asked 5 questions about your
+        property, how you occupy it, your household income and your current
+        insulation and heating.
+      </p>
+      <p className="govuk-body">
+        This service is for people in England who own their home or rent it from
+        a council or housing association. If you rent privately, your landlord
+        must apply.
+      </p>
+      <GovukButton variant="start" onClick={() => navigate('/property-type')}>
+        Start now
+      </GovukButton>
+    </div>
   );
 }
 

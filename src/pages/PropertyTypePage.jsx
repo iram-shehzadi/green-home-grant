@@ -1,17 +1,28 @@
-// TODO: Import useNavigate from react-router-dom
+import QuestionPage from '../components/QuestionPage';
 
-function PropertyTypePage() {
-  // TODO: Read current value from form state (passed via props)
-  // TODO: Add validation and error handling
-  // TODO: On "Continue", save answer to state and navigate to /ownership
+const FIELD = 'propertyType';
 
+// Values must match the answer vocabulary in CLAUDE.md (used by eligibility.js).
+const OPTIONS = [
+  { value: 'house', label: 'House' },
+  { value: 'bungalow', label: 'Bungalow' },
+  { value: 'flat', label: 'Flat' },
+  { value: 'maisonette', label: 'Maisonette' },
+  { value: 'other', label: 'Other' },
+];
+
+function PropertyTypePage({ formData, updateField }) {
   return (
-    <>
-      <a href="/" className="govuk-back-link">Back</a>
-      <h1 className="govuk-heading-l">What type of property do you live in?</h1>
-      {/* TODO: Add radio buttons for: Detached house, Semi-detached house, Terraced house, Flat/apartment, Bungalow */}
-      {/* TODO: Add a Continue button */}
-    </>
+    <QuestionPage
+      question="What type of property do you live in?"
+      fieldName={FIELD}
+      options={OPTIONS}
+      value={formData[FIELD]}
+      onChange={(value) => updateField(FIELD, value)}
+      backPath="/"
+      nextPath="/ownership"
+      errorMessage="Select the type of property you live in"
+    />
   );
 }
 
