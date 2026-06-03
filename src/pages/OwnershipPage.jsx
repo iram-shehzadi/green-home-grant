@@ -1,17 +1,27 @@
-// TODO: Import useNavigate from react-router-dom
+import QuestionPage from '../components/QuestionPage';
 
-function OwnershipPage() {
-  // TODO: Read current value from form state
-  // TODO: Add validation and error handling
-  // TODO: On "Continue", save answer and navigate to /income
+const FIELD = 'ownership';
 
+// Values must match the answer vocabulary in CLAUDE.md (used by eligibility.js).
+const OPTIONS = [
+  { value: 'own', label: 'Own it (with or without a mortgage)' },
+  { value: 'private-rent', label: 'Rent from a private landlord' },
+  { value: 'housing-association', label: 'Rent from a housing association' },
+  { value: 'council', label: 'Rent from the council' },
+];
+
+function OwnershipPage({ formData, updateField }) {
   return (
-    <>
-      <a href="/property-type" className="govuk-back-link">Back</a>
-      <h1 className="govuk-heading-l">Do you own or rent your property?</h1>
-      {/* TODO: Add radio buttons for: Own (with or without mortgage), Rent from a private landlord, Rent from a housing association, Rent from the council */}
-      {/* TODO: Add a Continue button */}
-    </>
+    <QuestionPage
+      question="Do you own or rent your property?"
+      fieldName={FIELD}
+      options={OPTIONS}
+      value={formData[FIELD]}
+      onChange={(value) => updateField(FIELD, value)}
+      backPath="/property-type"
+      nextPath="/income"
+      errorMessage="Select whether you own or rent your property"
+    />
   );
 }
 

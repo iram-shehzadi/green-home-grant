@@ -41,7 +41,12 @@ function App() {
                 <PropertyTypePage formData={formData} updateField={updateField} />
               }
             />
-            <Route path="/ownership" element={<OwnershipPage />} />
+            <Route
+              path="/ownership"
+              element={
+                <OwnershipPage formData={formData} updateField={updateField} />
+              }
+            />
             <Route path="/income" element={<IncomePage />} />
             <Route path="/insulation" element={<InsulationPage />} />
             <Route path="/heating" element={<HeatingPage />} />
