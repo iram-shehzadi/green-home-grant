@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { useState, useEffect, useRef } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import GovukHeader from './components/GovukHeader';
 import GovukFooter from './components/GovukFooter';
 import PhaseBanner from './components/PhaseBanner';
@@ -27,12 +27,35 @@ function App() {
   const updateField = (key, value) =>
     setFormData((prev) => ({ ...prev, [key]: value }));
 
+  // Move focus to the main region on each route change (but not the initial
+  // load) so keyboard and screen-reader users are oriented to the new page.
+  const mainRef = useRef(null);
+  const location = useLocation();
+  const isFirstRender = useRef(true);
+
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    mainRef.current?.focus();
+  }, [location.pathname]);
+
   return (
     <>
+      <a href="#main-content" className="govuk-skip-link">
+        Skip to main content
+      </a>
       <GovukHeader />
       <div className="govuk-width-container">
         <PhaseBanner phase="alpha" feedbackHref="#" />
-        <main className="govuk-main-wrapper" role="main">
+        <main
+          className="govuk-main-wrapper"
+          id="main-content"
+          role="main"
+          tabIndex={-1}
+          ref={mainRef}
+        >
           <Routes>
             <Route path="/" element={<StartPage />} />
             <Route

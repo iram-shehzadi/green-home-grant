@@ -66,6 +66,42 @@ body {
   padding-bottom: var(--govuk-spacing-8);
 }
 
+/* The main region is focused programmatically on route change; don't show a
+   focus ring around the whole page when that happens. */
+.govuk-main-wrapper:focus {
+  outline: none;
+}
+
+/* Skip link — visually hidden until focused, then shown at the top-left.
+   (Official GOV.UK class name; minimal matching CSS per the styling rules.) */
+.govuk-skip-link {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.govuk-skip-link:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  margin: 0;
+  padding: var(--govuk-spacing-2) var(--govuk-spacing-3);
+  overflow: visible;
+  clip: auto;
+  clip-path: none;
+  white-space: inherit;
+  background-color: var(--govuk-focus-colour);
+  color: var(--govuk-black);
+  outline: 3px solid var(--govuk-focus-colour);
+  outline-offset: 0;
+}
+
 /* Typography */
 .govuk-heading-xl {
   font-size: 48px;
