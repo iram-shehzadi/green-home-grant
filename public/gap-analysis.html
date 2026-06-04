@@ -221,12 +221,12 @@
             <td class="ck"><input type="checkbox" id="m-qa" data-track="done" aria-label="QA pass done"></td>
           </tr>
           <tr>
-            <td><span class="pill pill-note">decide first</span><br>Duplicate CSS: pick one source of truth (govuk-frontend vs App.css) — team decision before refactor</td>
-            <td><span class="files">main.jsx</span>, <span class="files">App.css</span></td>
-            <td>— <span style="color:#505a5f">(branch when decided)</span></td>
+            <td><span class="pill pill-a11y">decided</span><br>Duplicate CSS: govuk-frontend chosen as the single source of truth; App.css trimmed to extras (451 → 122 lines)</td>
+            <td><span class="files">App.css</span></td>
+            <td><span class="files">chore/css-single-source</span><br><a href="https://github.com/iram-shehzadi/green-home-grant/pull/19">PR #19</a> <span style="color:#505a5f">(stacked on #16)</span></td>
             <td><span class="effort e-med">Med</span></td>
-            <td class="ck">n/a</td>
-            <td class="ck"><input type="checkbox" id="m-css" data-track="done" aria-label="CSS decision resolved"></td>
+            <td class="ck"><input type="checkbox" id="p19" aria-label="PR #19 pushed" checked></td>
+            <td class="ck"><input type="checkbox" id="m-css" data-track="done" aria-label="PR #19 merged"></td>
           </tr>
         </tbody>
       </table>
@@ -251,9 +251,9 @@
 
       <!-- 4. RISKS -->
       <h2>4. Risks, blockers &amp; accessibility concerns</h2>
-      <div class="inset amber">
-        <h3 style="margin-top:0">🟡 Duplicate / competing CSS (maintenance risk)</h3>
-        <p style="margin-bottom:0"><span class="files">main.jsx</span> imports the <em>full</em> <span class="files">govuk-frontend.min.css</span> <em>and</em> <span class="files">App.css</span> hand-rolls its own <span class="files">.govuk-*</span> rules. They overlap (summary-list, radios, buttons). govuk-frontend loads second so it usually wins, but the two can fight. Decide on <strong>one source of truth</strong> — ideally lean on govuk-frontend and trim App.css to genuine extras.</p>
+      <div class="inset green">
+        <h3 style="margin-top:0">🟢 Duplicate / competing CSS — resolved</h3>
+        <p style="margin-bottom:0">Previously <span class="files">App.css</span> hand-rolled its own <span class="files">.govuk-*</span> rules alongside the full <span class="files">govuk-frontend.min.css</span> import. <strong>govuk-frontend is now the single source of truth</strong> and App.css has been trimmed to genuine extras (451 → 122 lines) in <a href="https://github.com/iram-shehzadi/green-home-grant/pull/19">PR #19</a>. No visual change — the removed rules were already overridden by govuk-frontend.</p>
       </div>
       <div class="inset amber">
         <h3 style="margin-top:0">🟡 npm install required after pulling</h3>
