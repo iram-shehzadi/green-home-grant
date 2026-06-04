@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Team Plan — Green Home Grant</title>
+  <style>
+    /* Minimal GOV.UK-style theme — self-contained, no build needed. */
+    * { box-sizing: border-box; }
+    body {
+      font-family: arial, helvetica, sans-serif;
+      color: #0b0c0c;
+      background: #ffffff;
+      margin: 0;
+      line-height: 1.25;
+      -webkit-text-size-adjust: 100%;
+    }
+    a { color: #1d70b8; }
+    a:focus { outline: 3px solid transparent; background: #fd0; box-shadow: 0 -2px #fd0, 0 4px #0b0c0c; color: #0b0c0c; text-decoration: none; }
+
+    /* Black GOV.UK header bar */
+    .govuk-header { background: #0b0c0c; color: #fff; padding: 10px 0; border-bottom: 10px solid #1d70b8; }
+    .govuk-header__title { font-size: 1.5rem; font-weight: 700; }
+
+    /* Phase banner */
+    .phase-banner { border-bottom: 1px solid #b1b4b6; padding: 10px 0; font-size: 1rem; }
+    .tag { background: #1d70b8; color: #fff; font-weight: 700; text-transform: uppercase; font-size: .75rem; padding: 4px 8px; margin-right: 10px; letter-spacing: 1px; }
+
+    .container { max-width: 960px; margin: 0 auto; padding: 0 15px; }
+    main { padding: 25px 0 60px; }
+
+    h1 { font-size: 2.25rem; font-weight: 700; margin: 20px 0 30px; }
+    h2 { font-size: 1.5rem; font-weight: 700; margin: 40px 0 15px; padding-top: 15px; }
+    h3 { font-size: 1.1875rem; font-weight: 700; margin: 25px 0 10px; }
+    p, li { font-size: 1.1875rem; max-width: 38em; }
+    @media (max-width: 640px) { h1 { font-size: 1.75rem; } h2 { font-size: 1.25rem; } p, li { font-size: 1rem; } }
+
+    .lede { font-size: 1.375rem; font-weight: 400; }
+
+    /* Inset text (left blue/grey bar) */
+    .inset { border-left: 10px solid #b1b4b6; padding: 15px; margin: 20px 0; }
+    .inset.action { border-left-color: #1d70b8; background: #f3f2f1; }
+
+    /* Progress bar */
+    .progress-wrap { background: #f3f2f1; border: 1px solid #b1b4b6; padding: 15px; margin: 0 0 30px; }
+    .progress-track { background: #fff; border: 1px solid #b1b4b6; height: 24px; margin-top: 8px; }
+    .progress-fill { background: #00703c; height: 100%; width: 0; transition: width .2s; }
+    .progress-label { font-weight: 700; }
+
+    /* Checklist */
+    ul.tasks { list-style: none; padding: 0; margin: 10px 0; }
+    ul.tasks li { display: flex; align-items: flex-start; gap: 12px; padding: 12px 10px; border-bottom: 1px solid #b1b4b6; max-width: none; }
+    ul.tasks li:first-child { border-top: 1px solid #b1b4b6; }
+    ul.tasks input[type="checkbox"] { width: 30px; height: 30px; min-width: 30px; margin: 0; cursor: pointer; accent-color: #00703c; }
+    ul.tasks input[type="checkbox"]:focus { outline: 3px solid #fd0; outline-offset: 0; }
+    ul.tasks label { cursor: pointer; padding-top: 2px; }
+    ul.tasks .done label { text-decoration: line-through; color: #505a5f; }
+
+    /* Person cards */
+    .people { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin: 20px 0; }
+    @media (max-width: 640px) { .people { grid-template-columns: 1fr; } }
+    .card { border: 1px solid #b1b4b6; border-top: 8px solid #1d70b8; padding: 15px 20px 20px; }
+    .card h3 { margin-top: 5px; }
+    .card .files { font-size: .95rem; color: #505a5f; word-break: break-word; }
+
+    /* Code block */
+    pre { background: #f3f2f1; border: 1px solid #b1b4b6; padding: 15px; overflow-x: auto; font-size: .95rem; }
+    code { font-family: monospace; }
+
+    table { border-collapse: collapse; width: 100%; margin: 15px 0; }
+    th, td { text-align: left; padding: 10px; border-bottom: 1px solid #b1b4b6; vertical-align: top; font-size: 1rem; }
+    th { font-weight: 700; }
+
+    .reset { background: none; border: 0; color: #1d70b8; text-decoration: underline; cursor: pointer; font-size: 1rem; padding: 0; margin-top: 10px; }
+    .reset:focus { outline: 3px solid #fd0; background: #fd0; color: #0b0c0c; }
+
+    .skip-link { position: absolute; left: -9999px; }
+    .skip-link:focus { left: 0; top: 0; background: #fd0; padding: 10px; z-index: 10; }
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <header class="govuk-header">
+    <div class="container"><span class="govuk-header__title">Green Home Grant — Team Plan</span></div>
+  </header>
+
+  <div class="phase-banner">
+    <div class="container"><span class="tag">Hackathon</span>Our build plan — tick things off as we go. Your progress saves in this browser.</div>
+  </div>
+
+  <div class="container">
+    <main id="main">
+      <h1>What we're building and who does what</h1>
+      <p class="lede">A GOV.UK eligibility checker that replaces a 35-minute phone call. Four of us, no merge clashes — everyone works in their own files.</p>
+
+      <!-- PROGRESS -->
+      <div class="progress-wrap" aria-live="polite">
+        <span class="progress-label" id="progress-text">0 of 0 done</span>
+        <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+        <button class="reset" id="reset-btn" type="button">Reset all tick boxes</button>
+      </div>
+
+      <!-- STEP 0 -->
+      <h2>Step 0 — Do this first (one person, ~2 minutes)</h2>
+      <div class="inset action">
+        <p><strong>Land the "wiring" commit to <code>main</code> before anyone starts.</strong> Right now <code>CheckAnswersPage</code> and <code>ResultPage</code> get no data, and the phase banner isn't shown. One person fixes <code>App.jsx</code>, then nobody touches it again — that's how we avoid clashes.</p>
+        <ul class="tasks" data-group="step0">
+          <li><input type="checkbox" id="c-wire1"><label for="c-wire1">Pass <code>formData</code> / <code>updateField</code> to the <code>/check-answers</code> and <code>/result</code> routes</label></li>
+          <li><input type="checkbox" id="c-wire2"><label for="c-wire2">Mount <code>&lt;PhaseBanner&gt;</code> below the header</label></li>
+          <li><input type="checkbox" id="c-wire3"><label for="c-wire3"><code>npm run build</code> passes, then merge to <code>main</code></label></li>
+        </ul>
+        <p style="font-size:1rem;margin-bottom:0">Already done for you on branch <code>chore/wire-app</code> — just review and merge it.</p>
+      </div>
+
+      <!-- WHO DOES WHAT -->
+      <h2>The 4-way split</h2>
+      <p>Each person owns different files, so our pull requests don't fight each other.</p>
+
+      <div class="people">
+        <div class="card">
+          <h3>Person A — Eligibility + tests</h3>
+          <p>The rules engine and the unit tests. The result page depends on this.</p>
+          <p class="files"><strong>Owns:</strong> src/utils/eligibility.js · src/utils/eligibility.test.js · package.json · vite.config.js</p>
+          <ul class="tasks" data-group="A">
+            <li><input type="checkbox" id="a1"><label for="a1">Write <code>checkEligibility(formData)</code> as a pure function (see contract below)</label></li>
+            <li><input type="checkbox" id="a2"><label for="a2">5+ unit tests: eligible / partial / not-eligible + edge cases</label></li>
+            <li><input type="checkbox" id="a3"><label for="a3">Confirm <code>npm test</code> passes</label></li>
+          </ul>
+          <p style="font-size:1rem;margin-bottom:0">Starter on branch <code>feature/eligibility</code> (7 tests already pass) — refine the policy.</p>
+        </div>
+
+        <div class="card">
+          <h3>Person B — Check your answers</h3>
+          <p>The summary page where users review and change answers before submitting.</p>
+          <p class="files"><strong>Owns:</strong> src/pages/CheckAnswersPage.jsx</p>
+          <ul class="tasks" data-group="B">
+            <li><input type="checkbox" id="b1"><label for="b1"><code>govuk-summary-list</code> with one row per answer</label></li>
+            <li><input type="checkbox" id="b2"><label for="b2">A "Change" link per row (with visually-hidden field name)</label></li>
+            <li><input type="checkbox" id="b3"><label for="b3">"Accept and continue" button → goes to <code>/result</code></label></li>
+            <li><input type="checkbox" id="b4"><label for="b4">Read answers from the <code>formData</code> prop</label></li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Person C — Result page</h3>
+          <p>The outcome page. Calls Person A's function and shows the result.</p>
+          <p class="files"><strong>Owns:</strong> src/pages/ResultPage.jsx</p>
+          <ul class="tasks" data-group="C">
+            <li><input type="checkbox" id="cc1"><label for="cc1">Call <code>checkEligibility(formData)</code></label></li>
+            <li><input type="checkbox" id="cc2"><label for="cc2">Eligible → green <code>govuk-panel</code>; partial / not-eligible stated plainly</label></li>
+            <li><input type="checkbox" id="cc3"><label for="cc3">Show the reason + next steps (never colour alone — always text)</label></li>
+            <li><input type="checkbox" id="cc4"><label for="cc4">Stub the contract shape locally until A's branch merges</label></li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Person D — Accessibility, polish &amp; the AI log</h3>
+          <p>Makes it WCAG-compliant on mobile, and owns the required AI log.</p>
+          <p class="files"><strong>Owns:</strong> src/pages/AccessibilityStatementPage.jsx · AI_LOG.md · additive App.css</p>
+          <ul class="tasks" data-group="D">
+            <li><input type="checkbox" id="d1"><label for="d1">Test every page at 320px — no sideways scroll, tap targets ≥ 44px</label></li>
+            <li><input type="checkbox" id="d2"><label for="d2">Check visible focus + 4.5:1 contrast everywhere</label></li>
+            <li><input type="checkbox" id="d3"><label for="d3">Fill in the accessibility statement page + phase banner feedback link</label></li>
+            <li><input type="checkbox" id="d4"><label for="d4">Collect 3+ real AI_LOG entries (Date, Task, What AI Generated, What You Changed + Why)</label></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- CONTRACT -->
+      <h2>The one thing A and C must agree first</h2>
+      <p>Person C's page imports Person A's function. Agree this exact return shape <strong>before</strong> coding, then you can both work without waiting on each other.</p>
+      <pre><code>// src/utils/eligibility.js
+export function checkEligibility(formData) {
+  return {
+    outcome: 'eligible' | 'partial' | 'not-eligible',
+    schemes: ['insulation', 'heat-pump'],  // what they qualify for
+    reason: 'Plain-English why',
+    nextSteps: ['...'],
+  };
+}</code></pre>
+
+      <h3>Answer values — use these EXACT strings (A and C both depend on them)</h3>
+      <table>
+        <tr><th>Field</th><th>Allowed values</th></tr>
+        <tr><td>propertyType</td><td>house · bungalow · flat · maisonette · other</td></tr>
+        <tr><td>ownership</td><td>own · private-rent · housing-association · council</td></tr>
+        <tr><td>income</td><td>under-31000 · 31000-50000 · over-50000</td></tr>
+        <tr><td>insulation</td><td>both · wall · loft · none · dont-know</td></tr>
+        <tr><td>heating</td><td>gas · oil · electric · heat-pump · other</td></tr>
+      </table>
+
+      <!-- WORKING AGREEMENTS -->
+      <h2>How we work (keep it simple)</h2>
+      <ul class="tasks" data-group="rules">
+        <li><input type="checkbox" id="r1"><label for="r1">One branch per task: <code>feature/eligibility</code>, <code>feature/check-answers</code>, <code>feature/result</code>, <code>feature/a11y</code></label></li>
+        <li><input type="checkbox" id="r2"><label for="r2"><code>npm run build</code> must pass before you push</label></li>
+        <li><input type="checkbox" id="r3"><label for="r3">Small PRs, reviewed by one other person before merge</label></li>
+        <li><input type="checkbox" id="r4"><label for="r4">Reuse <code>govuk-*</code> classes already in App.css — match the GOV.UK Design System, don't invent styles</label></li>
+        <li><input type="checkbox" id="r5"><label for="r5">Don't append to AI_LOG.md at the same time — draft your entry in your PR, D transcribes</label></li>
+      </ul>
+
+      <h2>The 6 things we must ship (the floor)</h2>
+      <ul class="tasks" data-group="floor">
+        <li><input type="checkbox" id="f1"><label for="f1">Start page + 5 question pages (one thing per page) — <em>done</em></label></li>
+        <li><input type="checkbox" id="f2"><label for="f2">Check-your-answers summary with Change links — <em>Person B</em></label></li>
+        <li><input type="checkbox" id="f3"><label for="f3">Result page with a clear outcome — <em>Person C</em></label></li>
+        <li><input type="checkbox" id="f4"><label for="f4">GOV.UK typography, spacing, heading hierarchy — <em>all of us</em></label></li>
+        <li><input type="checkbox" id="f5"><label for="f5">WCAG 2.2 AA: labels, keyboard, contrast, focus — <em>Person D</em></label></li>
+        <li><input type="checkbox" id="f6"><label for="f6">AI_LOG.md with 3+ complete entries — <em>Person D</em></label></li>
+      </ul>
+
+      <p style="margin-top:40px;color:#505a5f;font-size:1rem">Tip: open <code>public/team-plan.html</code> in your browser by double-clicking it, or — with <code>npm run dev</code> running — add <code>/team-plan.html</code> to the site URL. Tick boxes save automatically in your own browser.</p>
+    </main>
+  </div>
+
+  <script>
+    // Persist every checkbox in localStorage, keyed by its id. No backend needed.
+    (function () {
+      var KEY = 'ghg-team-plan';
+      var boxes = Array.prototype.slice.call(document.querySelectorAll('input[type="checkbox"]'));
+      var saved = {};
+      try { saved = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) { saved = {}; }
+
+      function save() {
+        var state = {};
+        boxes.forEach(function (b) { state[b.id] = b.checked; });
+        try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+      }
+      function paintRow(b) {
+        var li = b.closest('li');
+        if (li) li.classList.toggle('done', b.checked);
+      }
+      function updateProgress() {
+        var done = boxes.filter(function (b) { return b.checked; }).length;
+        var total = boxes.length;
+        document.getElementById('progress-text').textContent = done + ' of ' + total + ' done';
+        document.getElementById('progress-fill').style.width = total ? (done / total * 100) + '%' : '0';
+      }
+
+      boxes.forEach(function (b) {
+        if (saved[b.id]) b.checked = true;
+        paintRow(b);
+        b.addEventListener('change', function () { paintRow(b); save(); updateProgress(); });
+      });
+      updateProgress();
+
+      document.getElementById('reset-btn').addEventListener('click', function () {
+        boxes.forEach(function (b) { b.checked = false; paintRow(b); });
+        save(); updateProgress();
+      });
+    })();
+  </script>
+</body>
+</html>
