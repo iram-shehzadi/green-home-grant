@@ -65,7 +65,10 @@ function App() {
                 <HeatingPage formData={formData} updateField={updateField} />
               }
             />
-            <Route path="/check-answers" element={<CheckAnswersPage />} />
+            <Route
+              path="/check-answers"
+              element={<CheckAnswersPage formData={formData} />}
+            />
             <Route path="/result" element={<ResultPage />} />
             <Route path="/accessibility-statement" element={<AccessibilityStatementPage />} />
           </Routes>
