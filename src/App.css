@@ -23,8 +23,9 @@
   --govuk-spacing-4: 20px;
   --govuk-spacing-5: 25px;
   --govuk-spacing-6: 30px;
-  --govuk-spacing-8: 40px;
-  --govuk-spacing-9: 50px;
+  --govuk-spacing-7: 40px;
+  --govuk-spacing-8: 50px;
+  --govuk-spacing-9: 60px;
 }
 
 /* Reset */
@@ -62,8 +63,8 @@ body {
 }
 
 .govuk-main-wrapper {
-  padding-top: var(--govuk-spacing-8);
-  padding-bottom: var(--govuk-spacing-8);
+  padding-top: var(--govuk-spacing-7);
+  padding-bottom: var(--govuk-spacing-7);
 }
 
 /* Typography */
@@ -72,7 +73,7 @@ body {
   line-height: 1.0416666667;
   font-weight: 700;
   margin-top: 0;
-  margin-bottom: var(--govuk-spacing-8);
+  margin-bottom: var(--govuk-spacing-7);
 }
 
 .govuk-heading-l {
@@ -245,7 +246,7 @@ a:focus {
 .govuk-error-summary {
   border: 4px solid var(--govuk-error-colour);
   padding: var(--govuk-spacing-4);
-  margin-bottom: var(--govuk-spacing-8);
+  margin-bottom: var(--govuk-spacing-7);
 }
 
 .govuk-error-summary__title {
@@ -291,26 +292,6 @@ a:focus {
 .govuk-summary-list__actions {
   width: 20%;
   text-align: right;
-}
-
-/* Panel (for result page) */
-.govuk-panel {
-  background: var(--govuk-green);
-  color: var(--govuk-white);
-  padding: var(--govuk-spacing-8) var(--govuk-spacing-6);
-  text-align: center;
-  margin-bottom: var(--govuk-spacing-6);
-}
-
-.govuk-panel__title {
-  font-size: 48px;
-  font-weight: 700;
-  margin: 0 0 var(--govuk-spacing-6);
-}
-
-.govuk-panel__body {
-  font-size: 36px;
-  margin: 0;
 }
 
 /* Back link */
@@ -371,7 +352,7 @@ a:focus {
 
 .govuk-fieldset__legend--l {
   font-size: 36px;
-  line-height: 1.04;
+  line-height: 1.1111111111;
 }
 
 .govuk-fieldset__heading {
@@ -392,15 +373,7 @@ a:focus {
   }
 
   .govuk-heading-m {
-    font-size: 19px;
-  }
-
-  .govuk-panel__title {
-    font-size: 32px;
-  }
-
-  .govuk-panel__body {
-    font-size: 24px;
+    font-size: 18px;
   }
 
   .govuk-summary-list__row {
