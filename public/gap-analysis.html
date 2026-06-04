@@ -118,17 +118,17 @@
   <div class="container">
     <main id="main">
       <h1>Acceptance criteria audit</h1>
-      <p class="lede">15 of 16 criteria fully met. We are essentially at the MVP floor — one real gap remains, the rest is polish and accessibility hardening.</p>
+      <p class="lede">All 16 criteria met. The AI_LOG fix (PR #15) is merged; remaining open PRs are accessibility hardening and hygiene, not acceptance-criteria gaps.</p>
 
       <div class="meta">
-        <strong>Branch:</strong> <span class="files">main</span> (HEAD <span class="files">9277eae</span>) &nbsp;·&nbsp;
+        <strong>Branch:</strong> <span class="files">main</span> (HEAD <span class="files">4cde26b</span>) &nbsp;·&nbsp;
         <strong>Build:</strong> ✅ passes &nbsp;·&nbsp;
         <strong>Tests:</strong> ✅ 7 / 7 pass
       </div>
 
       <div class="summary">
-        <div class="stat green"><span class="n">15</span><span class="lbl">✅ Complete</span></div>
-        <div class="stat amber"><span class="n">1</span><span class="lbl">⚠️ Partial</span></div>
+        <div class="stat green"><span class="n">16</span><span class="lbl">✅ Complete</span></div>
+        <div class="stat amber"><span class="n">0</span><span class="lbl">⚠️ Partial</span></div>
         <div class="stat red"><span class="n">0</span><span class="lbl">❌ Missing</span></div>
       </div>
 
@@ -154,7 +154,7 @@
           <tr><td class="num">13</td><td>Client-side validation for empty fields</td><td><span class="badge b-done">Complete</span></td><td>Continue blocks an empty answer</td></tr>
           <tr><td class="num">14</td><td>GOV.UK error pattern (summary + inline)</td><td><span class="badge b-done">Complete</span></td><td>Focused error summary + inline message</td></tr>
           <tr><td class="num">15</td><td>≥5 unit tests pass</td><td><span class="badge b-done">Complete</span></td><td>7 tests in eligibility.test.js</td></tr>
-          <tr><td class="num">16</td><td>AI_LOG: 3+ instances, 4 fields each</td><td><span class="badge b-part">Partial</span></td><td>3 instances, but Instance 2 is missing its Date field &amp; table header</td></tr>
+          <tr><td class="num">16</td><td>AI_LOG: 3+ instances, 4 fields each</td><td><span class="badge b-done">Complete</span></td><td>Fixed in PR #15 — Instance 2 now has its Date field; all 3 instances have four complete fields</td></tr>
         </tbody>
       </table>
 
@@ -186,7 +186,7 @@
             <td><span class="files">fix/ai-log-instance-2</span><br><a href="https://github.com/iram-shehzadi/green-home-grant/pull/15">PR #15</a></td>
             <td><span class="effort e-low">Low</span></td>
             <td class="ck"><input type="checkbox" id="p15" aria-label="PR #15 pushed" checked></td>
-            <td class="ck"><input type="checkbox" id="m15" data-track="done" aria-label="PR #15 merged"></td>
+            <td class="ck"><input type="checkbox" id="m15" data-track="done" aria-label="PR #15 merged" checked></td>
           </tr>
           <tr>
             <td><span class="pill pill-a11y">backs #10</span><br>Skip-to-content link + route-change focus management</td>
@@ -238,7 +238,7 @@
       <!-- 3. ORDER -->
       <h2>3. Recommended implementation order</h2>
       <ol class="steps">
-        <li><strong>Fix AI_LOG Instance 2</strong> (Low) — the only outstanding acceptance criterion. Do this first.</li>
+        <li><strong>Fix AI_LOG Instance 2</strong> (Low) — <s>the only outstanding acceptance criterion</s> ✅ done (PR #15 merged). All 16 criteria now met.</li>
         <li><strong>Manual QA pass</strong> (Low) — verify 320px + contrast; gives you evidence for the presentation.</li>
         <li><strong>Accessibility statement content</strong> (Low–Med) — so the footer link isn't dead.</li>
         <li><strong>Skip link + remove nested &lt;main&gt;</strong> (Low) — quick, high-value WCAG wins.</li>
