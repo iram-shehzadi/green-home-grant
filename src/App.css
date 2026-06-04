@@ -458,6 +458,10 @@ a:focus {
   padding-left: 20px;
 }
 
+.govuk-list--bullet {
+  list-style-type: disc;
+}
+
 /* Fieldset */
 .govuk-fieldset {
   border: 0;
