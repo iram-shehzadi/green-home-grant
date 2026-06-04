@@ -38,26 +38,23 @@ function NextSteps({ nextSteps }) {
   );
 }
 
-// Renders the eligibility outcome. Per CLAUDE.md, only the positive "eligible"
-// outcome uses the green confirmation panel; "partial" and "not-eligible" are
-// stated plainly with a heading, the reason, and what to do next.
+// Renders the eligibility outcome. Following the GOV.UK "Check a service is
+// suitable" pattern, every outcome is shown as a plain page heading + body text.
+// The confirmation panel is only for completed transactions (not eligibility
+// checks), and GOV.UK Frontend has no negative/grey panel variant.
+const TITLES = {
+  eligible: 'You may be eligible for a Green Home Grant',
+  partial: 'You may be eligible for partial funding',
+  'not-eligible': 'You are not eligible for a Green Home Grant',
+};
+
 function ResultPage({ formData }) {
   const { outcome, schemes, reason, nextSteps } = checkEligibility(formData || {});
+  const title = TITLES[outcome] || TITLES['not-eligible'];
 
   return (
     <>
-      {outcome === 'eligible' ? (
-        <div className="govuk-panel">
-          <h1 className="govuk-panel__title">You may be eligible</h1>
-          <div className="govuk-panel__body">for a Green Home Grant</div>
-        </div>
-      ) : (
-        <h1 className="govuk-heading-xl">
-          {outcome === 'partial'
-            ? 'You may be eligible for partial funding'
-            : 'You are not eligible for a Green Home Grant'}
-        </h1>
-      )}
+      <h1 className="govuk-heading-xl">{title}</h1>
 
       <p className="govuk-body">{reason}</p>
 
