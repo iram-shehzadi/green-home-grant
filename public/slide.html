@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>How we built this with Claude</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      font-family: arial, helvetica, sans-serif;
+      color: #0b0c0c;
+      background: #f3f2f1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    /* 16:9 slide */
+    .slide {
+      width: 100%;
+      max-width: 1000px;
+      aspect-ratio: 16 / 9;
+      background: #fff;
+      border-top: 12px solid #00703c;
+      box-shadow: 0 4px 24px rgba(0,0,0,.15);
+      padding: 5% 6%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .tag { display: inline-block; background: #1d70b8; color: #fff; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: clamp(9px, 1vw, 12px); padding: 4px 8px; align-self: flex-start; }
+    h1 { font-size: clamp(22px, 3.6vw, 40px); line-height: 1.1; margin: 14px 0 2px; }
+    .sub { font-size: clamp(12px, 1.7vw, 19px); color: #505a5f; margin-bottom: 4%; }
+
+    ul { list-style: none; display: grid; gap: 3.2%; }
+    li { display: flex; gap: 14px; align-items: flex-start; font-size: clamp(12px, 1.85vw, 21px); line-height: 1.3; }
+    .ico { flex: 0 0 auto; width: clamp(20px, 2.6vw, 30px); height: clamp(20px, 2.6vw, 30px); background: #00703c; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: clamp(11px, 1.4vw, 16px); margin-top: 2px; }
+    li strong { font-weight: 700; }
+    li .d { color: #505a5f; }
+
+    .footer { margin-top: auto; padding-top: 3%; border-top: 2px solid #b1b4b6; font-size: clamp(11px, 1.5vw, 18px); font-weight: 700; color: #0b0c0c; }
+    .footer .accent { color: #00703c; }
+
+    @media print {
+      body { background: #fff; padding: 0; }
+      .slide { box-shadow: none; max-width: none; height: 100vh; }
+    }
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <span class="tag">Green Home Grant · GOV.UK eligibility checker</span>
+    <h1>How we built it with Claude</h1>
+    <p class="sub">Four of us, one hackathon — Claude as our AI pair-programmer.</p>
+
+    <ul>
+      <li>
+        <span class="ico">1</span>
+        <span><strong>Planned as a team.</strong> <span class="d">Claude scoped a clash-free 4-way split — one branch each, “merge the wiring first” — so we shipped in parallel without conflicts.</span></span>
+      </li>
+      <li>
+        <span class="ico">2</span>
+        <span><strong>Built fast.</strong> <span class="d">It scaffolded the eligibility logic, unit tests, and the GOV.UK pages; we reviewed and refined every pull request.</span></span>
+      </li>
+      <li>
+        <span class="ico">3</span>
+        <span><strong>Kept it correct.</strong> <span class="d">Claude audited the app against the GOV.UK Design System and WCAG 2.2 AA, and checked design choices against the official source.</span></span>
+      </li>
+      <li>
+        <span class="ico">4</span>
+        <span><strong>Stayed honest.</strong> <span class="d">Every AI-assisted change is logged in AI_LOG.md — what Claude produced vs. what we changed and why.</span></span>
+      </li>
+    </ul>
+
+    <p class="footer">AI as a <span class="accent">teammate, not autopilot</span> — we made the calls, Claude did the legwork.</p>
+  </div>
+</body>
+</html>
