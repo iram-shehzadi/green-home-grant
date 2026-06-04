@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gap Analysis — Green Home Grant</title>
+  <style>
+    /* Minimal GOV.UK-style theme — self-contained, no build needed. */
+    * { box-sizing: border-box; }
+    body {
+      font-family: arial, helvetica, sans-serif;
+      color: #0b0c0c;
+      background: #ffffff;
+      margin: 0;
+      line-height: 1.25;
+      -webkit-text-size-adjust: 100%;
+    }
+    a { color: #1d70b8; }
+    a:focus { outline: 3px solid transparent; background: #fd0; box-shadow: 0 -2px #fd0, 0 4px #0b0c0c; color: #0b0c0c; text-decoration: none; }
+
+    .govuk-header { background: #0b0c0c; color: #fff; padding: 10px 0; border-bottom: 10px solid #1d70b8; }
+    .govuk-header__title { font-size: 1.5rem; font-weight: 700; }
+
+    .phase-banner { border-bottom: 1px solid #b1b4b6; padding: 10px 0; font-size: 1rem; }
+    .tag { background: #1d70b8; color: #fff; font-weight: 700; text-transform: uppercase; font-size: .75rem; padding: 4px 8px; margin-right: 10px; letter-spacing: 1px; }
+
+    .container { max-width: 960px; margin: 0 auto; padding: 0 15px; }
+    main { padding: 25px 0 60px; }
+
+    h1 { font-size: 2.25rem; font-weight: 700; margin: 20px 0 10px; }
+    h2 { font-size: 1.5rem; font-weight: 700; margin: 40px 0 15px; padding-top: 15px; border-top: 2px solid #b1b4b6; }
+    h3 { font-size: 1.1875rem; font-weight: 700; margin: 25px 0 10px; }
+    p, li { font-size: 1.1875rem; max-width: 42em; }
+    @media (max-width: 640px) { h1 { font-size: 1.75rem; } h2 { font-size: 1.25rem; } p, li { font-size: 1rem; } }
+
+    .lede { font-size: 1.375rem; font-weight: 400; }
+
+    /* Summary banner */
+    .summary { display: flex; flex-wrap: wrap; gap: 15px; margin: 20px 0 10px; }
+    .stat { flex: 1; min-width: 120px; border: 1px solid #b1b4b6; padding: 15px; text-align: center; }
+    .stat .n { font-size: 2.5rem; font-weight: 700; display: block; line-height: 1; }
+    .stat.green { border-top: 8px solid #00703c; }
+    .stat.amber { border-top: 8px solid #f47738; }
+    .stat.red   { border-top: 8px solid #d4351c; }
+    .stat .lbl { font-size: .95rem; color: #505a5f; }
+
+    .meta { background: #f3f2f1; border: 1px solid #b1b4b6; padding: 12px 15px; font-size: 1rem; margin: 15px 0; }
+    .meta strong { font-weight: 700; }
+
+    /* Status badges */
+    .badge { display: inline-block; font-weight: 700; font-size: .8rem; padding: 3px 8px; white-space: nowrap; text-transform: uppercase; letter-spacing: .5px; }
+    .b-done { background: #cce2d8; color: #005a30; }
+    .b-part { background: #fcd6c3; color: #6e3619; }
+    .b-miss { background: #f6d7d2; color: #942514; }
+
+    table { border-collapse: collapse; width: 100%; margin: 15px 0; }
+    th, td { text-align: left; padding: 10px; border-bottom: 1px solid #b1b4b6; vertical-align: top; font-size: 1rem; }
+    th { font-weight: 700; background: #f3f2f1; }
+    td.num { width: 32px; color: #505a5f; font-weight: 700; }
+    td.st { width: 110px; }
+
+    .inset { border-left: 10px solid #b1b4b6; padding: 12px 15px; margin: 20px 0; }
+    .inset.amber { border-left-color: #f47738; background: #fff7f2; }
+    .inset.blue { border-left-color: #1d70b8; background: #f3f2f1; }
+    .inset.green { border-left-color: #00703c; background: #f3f8f5; }
+
+    .files { font-family: monospace; font-size: .9rem; background: #f3f2f1; padding: 1px 5px; }
+    .effort { font-weight: 700; }
+    .e-low { color: #00703c; }
+    .e-med { color: #6e3619; }
+    .e-high { color: #942514; }
+
+    ol.steps { padding-left: 22px; }
+    ol.steps li { margin-bottom: 10px; }
+
+    /* Checklist */
+    .progress-wrap { background: #f3f2f1; border: 1px solid #b1b4b6; padding: 15px; margin: 0 0 20px; }
+    .progress-track { background: #fff; border: 1px solid #b1b4b6; height: 24px; margin-top: 8px; }
+    .progress-fill { background: #00703c; height: 100%; width: 0; transition: width .2s; }
+    .progress-label { font-weight: 700; }
+    ul.tasks { list-style: none; padding: 0; margin: 10px 0; }
+    ul.tasks li { display: flex; align-items: flex-start; gap: 12px; padding: 12px 10px; border-bottom: 1px solid #b1b4b6; max-width: none; }
+    ul.tasks li:first-child { border-top: 1px solid #b1b4b6; }
+    ul.tasks input[type="checkbox"] { width: 30px; height: 30px; min-width: 30px; margin: 0; cursor: pointer; accent-color: #00703c; }
+    ul.tasks input[type="checkbox"]:focus { outline: 3px solid #fd0; outline-offset: 0; }
+    ul.tasks label { cursor: pointer; padding-top: 2px; }
+    ul.tasks .done label { text-decoration: line-through; color: #505a5f; }
+    ul.tasks .meta-line { display: block; font-size: .95rem; color: #505a5f; margin-top: 4px; }
+
+    .reset { background: none; border: 0; color: #1d70b8; text-decoration: underline; cursor: pointer; font-size: 1rem; padding: 0; margin-top: 10px; }
+    .reset:focus { outline: 3px solid #fd0; background: #fd0; color: #0b0c0c; }
+
+    .skip-link { position: absolute; left: -9999px; }
+    .skip-link:focus { left: 0; top: 0; background: #fd0; padding: 10px; z-index: 10; }
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <header class="govuk-header">
+    <div class="container"><span class="govuk-header__title">Green Home Grant — Gap Analysis</span></div>
+  </header>
+
+  <div class="phase-banner">
+    <div class="container"><span class="tag">Hackathon</span>Where we stand against the acceptance criteria — before further development.</div>
+  </div>
+
+  <div class="container">
+    <main id="main">
+      <h1>Acceptance criteria audit</h1>
+      <p class="lede">15 of 16 criteria fully met. We are essentially at the MVP floor — one real gap remains, the rest is polish and accessibility hardening.</p>
+
+      <div class="meta">
+        <strong>Branch:</strong> <span class="files">main</span> (HEAD <span class="files">9277eae</span>) &nbsp;·&nbsp;
+        <strong>Build:</strong> ✅ passes &nbsp;·&nbsp;
+        <strong>Tests:</strong> ✅ 7 / 7 pass
+      </div>
+
+      <div class="summary">
+        <div class="stat green"><span class="n">15</span><span class="lbl">✅ Complete</span></div>
+        <div class="stat amber"><span class="n">1</span><span class="lbl">⚠️ Partial</span></div>
+        <div class="stat red"><span class="n">0</span><span class="lbl">❌ Missing</span></div>
+      </div>
+
+      <!-- 1. SCORECARD -->
+      <h2>1. Progress against the acceptance criteria</h2>
+      <table>
+        <thead>
+          <tr><th class="num">#</th><th>Criterion</th><th class="st">Status</th><th>Notes</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="num">1</td><td>Start page: title, description, "Start now"</td><td><span class="badge b-done">Complete</span></td><td>StartPage.jsx — h1, description, start button</td></tr>
+          <tr><td class="num">2</td><td>"Start now" → first question</td><td><span class="badge b-done">Complete</span></td><td>Navigates to /property-type</td></tr>
+          <tr><td class="num">3</td><td>≥5 question pages, one-thing-per-page</td><td><span class="badge b-done">Complete</span></td><td>5 pages, shared QuestionPage.jsx</td></tr>
+          <tr><td class="num">4</td><td>"Continue" → next question</td><td><span class="badge b-done">Complete</span></td><td>Chain verified end to end</td></tr>
+          <tr><td class="num">5</td><td>"Back" link to previous question</td><td><span class="badge b-done">Complete</span></td><td>Back link on every question page</td></tr>
+          <tr><td class="num">6</td><td>"Check your answers" summary list</td><td><span class="badge b-done">Complete</span></td><td>All 5 rows in govuk-summary-list</td></tr>
+          <tr><td class="num">7</td><td>"Change" link per answer → that question</td><td><span class="badge b-done">Complete</span></td><td>With visually-hidden field name</td></tr>
+          <tr><td class="num">8</td><td>Result page shows eligibility outcome</td><td><span class="badge b-done">Complete</span></td><td>3 outcomes via checkEligibility</td></tr>
+          <tr><td class="num">9</td><td>All inputs have &lt;label&gt;</td><td><span class="badge b-done">Complete</span></td><td>Radios use &lt;label htmlFor&gt;</td></tr>
+          <tr><td class="num">10</td><td>Keyboard reachable / operable</td><td><span class="badge b-done">Complete*</span></td><td>All native controls. *See skip-link &amp; focus concerns</td></tr>
+          <tr><td class="num">11</td><td>Colour contrast ≥ 4.5:1</td><td><span class="badge b-done">Complete*</span></td><td>GOV.UK palette passes. *Recommend a tool pass</td></tr>
+          <tr><td class="num">12</td><td>Reflows at 320px, no h-scroll</td><td><span class="badge b-done">Complete*</span></td><td>Responsive CSS present. *Not device-verified</td></tr>
+          <tr><td class="num">13</td><td>Client-side validation for empty fields</td><td><span class="badge b-done">Complete</span></td><td>Continue blocks an empty answer</td></tr>
+          <tr><td class="num">14</td><td>GOV.UK error pattern (summary + inline)</td><td><span class="badge b-done">Complete</span></td><td>Focused error summary + inline message</td></tr>
+          <tr><td class="num">15</td><td>≥5 unit tests pass</td><td><span class="badge b-done">Complete</span></td><td>7 tests in eligibility.test.js</td></tr>
+          <tr><td class="num">16</td><td>AI_LOG: 3+ instances, 4 fields each</td><td><span class="badge b-part">Partial</span></td><td>3 instances, but Instance 2 is missing its Date field &amp; table header</td></tr>
+        </tbody>
+      </table>
+
+      <!-- 2. REMAINING WORK -->
+      <h2>2. Remaining work — tick off as you go</h2>
+
+      <div class="progress-wrap" aria-live="polite">
+        <span class="progress-label" id="progress-text">0 of 0 done</span>
+        <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+        <button class="reset" id="reset-btn" type="button">Reset all tick boxes</button>
+      </div>
+
+      <div class="inset amber">
+        <h3 style="margin-top:0">The one actual criterion gap (#16)</h3>
+        <p style="margin-bottom:0"><strong>AI_LOG Instance 2 is malformed</strong> — missing the <span class="files">Date</span> row (only 3 of 4 fields), missing the table header so it renders broken, and the body text mislabels "Instance 1" as "Instance 2" after the entries were renumbered.</p>
+      </div>
+
+      <ul class="tasks" data-group="criterion">
+        <li><input type="checkbox" id="g1"><label for="g1">Fix AI_LOG Instance 2: add the Date row + table header, correct the Instance 1/2 cross-reference <span class="meta-line">File: <span class="files">AI_LOG.md</span> · Effort: <span class="effort e-low">Low</span> · This is the only outstanding acceptance criterion</span></label></li>
+      </ul>
+
+      <h3>Quality &amp; WCAG hardening (not numbered criteria, but strengthen the submission)</h3>
+      <ul class="tasks" data-group="hardening">
+        <li><input type="checkbox" id="h1"><label for="h1">Fill in the accessibility statement (footer links to it; all sections are TODO stubs) <span class="meta-line">File: <span class="files">AccessibilityStatementPage.jsx</span> · Effort: <span class="effort e-med">Low–Med</span></span></label></li>
+        <li><input type="checkbox" id="h2"><label for="h2">Add a "Skip to main content" link (WCAG 2.4.1; standard on every GOV.UK page) <span class="meta-line">Files: <span class="files">App.jsx</span> + a skip-link component · Effort: <span class="effort e-low">Low</span></span></label></li>
+        <li><input type="checkbox" id="h3"><label for="h3">Remove the nested &lt;main&gt; on the accessibility page (App.jsx already wraps routes in &lt;main&gt;; the page renders a second one) <span class="meta-line">Files: <span class="files">App.jsx</span> / <span class="files">AccessibilityStatementPage.jsx</span> · Effort: <span class="effort e-low">Low</span></span></label></li>
+        <li><input type="checkbox" id="h4"><label for="h4">Manage focus on route change (after Continue, focus is lost to &lt;body&gt;) <span class="meta-line">Files: <span class="files">QuestionPage.jsx</span> / route-focus hook · Effort: <span class="effort e-med">Med</span></span></label></li>
+        <li><input type="checkbox" id="h5"><label for="h5">Fix header logo link: it's a plain href="/" — full reload, bypasses the router basename, wipes formData <span class="meta-line">File: <span class="files">GovukHeader.jsx</span> · Effort: <span class="effort e-low">Low</span></span></label></li>
+        <li><input type="checkbox" id="h6"><label for="h6">QA pass: verify 320px reflow in dev tools + run one contrast checker (evidence for #11/#12) <span class="meta-line">No code · Effort: <span class="effort e-low">Low</span></span></label></li>
+      </ul>
+
+      <!-- 3. ORDER -->
+      <h2>3. Recommended implementation order</h2>
+      <ol class="steps">
+        <li><strong>Fix AI_LOG Instance 2</strong> (Low) — the only outstanding acceptance criterion. Do this first.</li>
+        <li><strong>Manual QA pass</strong> (Low) — verify 320px + contrast; gives you evidence for the presentation.</li>
+        <li><strong>Accessibility statement content</strong> (Low–Med) — so the footer link isn't dead.</li>
+        <li><strong>Skip link + remove nested &lt;main&gt;</strong> (Low) — quick, high-value WCAG wins.</li>
+        <li><strong>Route-change focus management</strong> (Med) — most substantive a11y improvement; do last as it touches navigation.</li>
+        <li><strong>Header link fix</strong> (Low) — convert to a router Link; nice-to-have.</li>
+      </ol>
+      <div class="inset blue">
+        <p style="margin:0">Steps 1–4 touch separate files → safe to do in parallel without clashes. Step 5 touches the question flow, so coordinate it with whoever owns that.</p>
+      </div>
+
+      <!-- 4. RISKS -->
+      <h2>4. Risks, blockers &amp; accessibility concerns</h2>
+      <div class="inset amber">
+        <h3 style="margin-top:0">🟡 Duplicate / competing CSS (maintenance risk)</h3>
+        <p style="margin-bottom:0"><span class="files">main.jsx</span> imports the <em>full</em> <span class="files">govuk-frontend.min.css</span> <em>and</em> <span class="files">App.css</span> hand-rolls its own <span class="files">.govuk-*</span> rules. They overlap (summary-list, radios, buttons). govuk-frontend loads second so it usually wins, but the two can fight. Decide on <strong>one source of truth</strong> — ideally lean on govuk-frontend and trim App.css to genuine extras.</p>
+      </div>
+      <div class="inset amber">
+        <h3 style="margin-top:0">🟡 npm install required after pulling</h3>
+        <p style="margin-bottom:0">The <span class="files">govuk-frontend</span> dependency was added recently — pulling without <span class="files">npm install</span> throws "Failed to resolve import". Team rule: <strong>pull → npm install → npm run dev</strong>.</p>
+      </div>
+      <div class="inset amber">
+        <h3 style="margin-top:0">🟡 Accessibility claims need evidence</h3>
+        <p style="margin-bottom:0">Criteria 10/11/12 are ✅ on code inspection, but a WCAG 2.2 AA submission should <em>demonstrate</em> it: a keyboard-only walkthrough, a 320px screenshot, and a contrast-checker result. Using GOV.UK Frontend components correctly is your strongest defence.</p>
+      </div>
+      <div class="inset green">
+        <h3 style="margin-top:0">🟢 No functional blockers</h3>
+        <p style="margin-bottom:0">The full journey (start → 5 questions → check answers → result) works, validation fires, and the eligibility logic is tested. Nothing is broken.</p>
+      </div>
+
+      <p style="margin-top:40px;color:#505a5f;font-size:1rem">Open <span class="files">public/gap-analysis.html</span> directly, or — with <span class="files">npm run dev</span> running — add <span class="files">/gap-analysis.html</span> to the site URL. Tick boxes save automatically in your own browser.</p>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      var KEY = 'ghg-gap-analysis';
+      var boxes = Array.prototype.slice.call(document.querySelectorAll('input[type="checkbox"]'));
+      var saved = {};
+      try { saved = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) { saved = {}; }
+
+      function save() {
+        var state = {};
+        boxes.forEach(function (b) { state[b.id] = b.checked; });
+        try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+      }
+      function paintRow(b) {
+        var li = b.closest('li');
+        if (li) li.classList.toggle('done', b.checked);
+      }
+      function updateProgress() {
+        var done = boxes.filter(function (b) { return b.checked; }).length;
+        var total = boxes.length;
+        document.getElementById('progress-text').textContent = done + ' of ' + total + ' done';
+        document.getElementById('progress-fill').style.width = total ? (done / total * 100) + '%' : '0';
+      }
+
+      boxes.forEach(function (b) {
+        if (saved[b.id]) b.checked = true;
+        paintRow(b);
+        b.addEventListener('change', function () { paintRow(b); save(); updateProgress(); });
+      });
+      updateProgress();
+
+      document.getElementById('reset-btn').addEventListener('click', function () {
+        boxes.forEach(function (b) { b.checked = false; paintRow(b); });
+        save(); updateProgress();
+      });
+    })();
+  </script>
+</body>
+</html>
