@@ -59,6 +59,16 @@
     td.num { width: 32px; color: #505a5f; font-weight: 700; }
     td.st { width: 110px; }
 
+    /* Implementation-plan table */
+    table.plan th.ck, table.plan td.ck { text-align: center; width: 64px; }
+    table.plan input[type="checkbox"] { width: 26px; height: 26px; cursor: pointer; accent-color: #00703c; }
+    table.plan input[type="checkbox"]:focus { outline: 3px solid #fd0; outline-offset: 0; }
+    table.plan a { word-break: break-word; }
+    .pill { display: inline-block; font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; padding: 2px 6px; border-radius: 2px; }
+    .pill-crit { background: #fcd6c3; color: #6e3619; }
+    .pill-a11y { background: #cce2d8; color: #005a30; }
+    .pill-note { background: #e1e7ea; color: #38444c; }
+
     .inset { border-left: 10px solid #b1b4b6; padding: 12px 15px; margin: 20px 0; }
     .inset.amber { border-left-color: #f47738; background: #fff7f2; }
     .inset.blue { border-left-color: #1d70b8; background: #f3f2f1; }
@@ -148,8 +158,9 @@
         </tbody>
       </table>
 
-      <!-- 2. REMAINING WORK -->
-      <h2>2. Remaining work — tick off as you go</h2>
+      <!-- 2. IMPLEMENTATION PLAN -->
+      <h2>2. Implementation plan — branches, PRs &amp; progress</h2>
+      <p>Each work item is on its own branch with an open PR (all pushed). Tick <strong>Merged / done</strong> as each one lands on <span class="files">main</span> — the progress bar tracks those. <span class="pill pill-crit">criterion</span> is the only numbered acceptance criterion; the rest is WCAG hardening and hygiene.</p>
 
       <div class="progress-wrap" aria-live="polite">
         <span class="progress-label" id="progress-text">0 of 0 done</span>
@@ -157,24 +168,72 @@
         <button class="reset" id="reset-btn" type="button">Reset all tick boxes</button>
       </div>
 
-      <div class="inset amber">
-        <h3 style="margin-top:0">The one actual criterion gap (#16)</h3>
-        <p style="margin-bottom:0"><strong>AI_LOG Instance 2 is malformed</strong> — missing the <span class="files">Date</span> row (only 3 of 4 fields), missing the table header so it renders broken, and the body text mislabels "Instance 1" as "Instance 2" after the entries were renumbered.</p>
+      <table class="plan">
+        <thead>
+          <tr>
+            <th>Work item</th>
+            <th>Files</th>
+            <th>Branch / PR</th>
+            <th>Effort</th>
+            <th class="ck">PR pushed</th>
+            <th class="ck">Merged / done</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="pill pill-crit">criterion #16</span><br>AI_LOG Instance 2 — add Date row + table header, fix the Instance 1/2 cross-reference</td>
+            <td><span class="files">AI_LOG.md</span></td>
+            <td><span class="files">fix/ai-log-instance-2</span><br><a href="https://github.com/iram-shehzadi/green-home-grant/pull/15">PR #15</a></td>
+            <td><span class="effort e-low">Low</span></td>
+            <td class="ck"><input type="checkbox" id="p15" aria-label="PR #15 pushed" checked></td>
+            <td class="ck"><input type="checkbox" id="m15" data-track="done" aria-label="PR #15 merged"></td>
+          </tr>
+          <tr>
+            <td><span class="pill pill-a11y">backs #10</span><br>Skip-to-content link + route-change focus management</td>
+            <td><span class="files">App.jsx</span>, <span class="files">App.css</span></td>
+            <td><span class="files">feature/a11y-skip-link-focus</span><br><a href="https://github.com/iram-shehzadi/green-home-grant/pull/16">PR #16</a></td>
+            <td><span class="effort e-med">Low–Med</span></td>
+            <td class="ck"><input type="checkbox" id="p16" aria-label="PR #16 pushed" checked></td>
+            <td class="ck"><input type="checkbox" id="m16" data-track="done" aria-label="PR #16 merged"></td>
+          </tr>
+          <tr>
+            <td><span class="pill pill-a11y">WCAG</span><br>Complete accessibility statement + remove nested &lt;main&gt;</td>
+            <td><span class="files">AccessibilityStatementPage.jsx</span></td>
+            <td><span class="files">feature/accessibility-statement</span><br><a href="https://github.com/iram-shehzadi/green-home-grant/pull/17">PR #17</a></td>
+            <td><span class="effort e-med">Low–Med</span></td>
+            <td class="ck"><input type="checkbox" id="p17" aria-label="PR #17 pushed" checked></td>
+            <td class="ck"><input type="checkbox" id="m17" data-track="done" aria-label="PR #17 merged"></td>
+          </tr>
+          <tr>
+            <td><span class="pill pill-note">hygiene</span><br>Header logo → router Link (no reload, keeps formData &amp; basename)</td>
+            <td><span class="files">GovukHeader.jsx</span></td>
+            <td><span class="files">fix/header-link-router</span><br><a href="https://github.com/iram-shehzadi/green-home-grant/pull/18">PR #18</a></td>
+            <td><span class="effort e-low">Low</span></td>
+            <td class="ck"><input type="checkbox" id="p18" aria-label="PR #18 pushed" checked></td>
+            <td class="ck"><input type="checkbox" id="m18" data-track="done" aria-label="PR #18 merged"></td>
+          </tr>
+          <tr>
+            <td><span class="pill pill-note">evidence</span><br>QA pass: verify 320px reflow + run a contrast checker (no code)</td>
+            <td>—</td>
+            <td>—</td>
+            <td><span class="effort e-low">Low</span></td>
+            <td class="ck">n/a</td>
+            <td class="ck"><input type="checkbox" id="m-qa" data-track="done" aria-label="QA pass done"></td>
+          </tr>
+          <tr>
+            <td><span class="pill pill-note">decide first</span><br>Duplicate CSS: pick one source of truth (govuk-frontend vs App.css) — team decision before refactor</td>
+            <td><span class="files">main.jsx</span>, <span class="files">App.css</span></td>
+            <td>— <span style="color:#505a5f">(branch when decided)</span></td>
+            <td><span class="effort e-med">Med</span></td>
+            <td class="ck">n/a</td>
+            <td class="ck"><input type="checkbox" id="m-css" data-track="done" aria-label="CSS decision resolved"></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="inset blue">
+        <p style="margin:0"><strong>Consolidations to avoid conflicts:</strong> skip-link + route-focus were merged into one PR (both edit <span class="files">App.jsx</span>), and the accessibility-statement content + nested-&lt;main&gt; fix into one PR (same file). All six rows above otherwise touch separate files, so the PRs can be reviewed and merged in any order.</p>
       </div>
-
-      <ul class="tasks" data-group="criterion">
-        <li><input type="checkbox" id="g1"><label for="g1">Fix AI_LOG Instance 2: add the Date row + table header, correct the Instance 1/2 cross-reference <span class="meta-line">File: <span class="files">AI_LOG.md</span> · Effort: <span class="effort e-low">Low</span> · This is the only outstanding acceptance criterion</span></label></li>
-      </ul>
-
-      <h3>Quality &amp; WCAG hardening (not numbered criteria, but strengthen the submission)</h3>
-      <ul class="tasks" data-group="hardening">
-        <li><input type="checkbox" id="h1"><label for="h1">Fill in the accessibility statement (footer links to it; all sections are TODO stubs) <span class="meta-line">File: <span class="files">AccessibilityStatementPage.jsx</span> · Effort: <span class="effort e-med">Low–Med</span></span></label></li>
-        <li><input type="checkbox" id="h2"><label for="h2">Add a "Skip to main content" link (WCAG 2.4.1; standard on every GOV.UK page) <span class="meta-line">Files: <span class="files">App.jsx</span> + a skip-link component · Effort: <span class="effort e-low">Low</span></span></label></li>
-        <li><input type="checkbox" id="h3"><label for="h3">Remove the nested &lt;main&gt; on the accessibility page (App.jsx already wraps routes in &lt;main&gt;; the page renders a second one) <span class="meta-line">Files: <span class="files">App.jsx</span> / <span class="files">AccessibilityStatementPage.jsx</span> · Effort: <span class="effort e-low">Low</span></span></label></li>
-        <li><input type="checkbox" id="h4"><label for="h4">Manage focus on route change (after Continue, focus is lost to &lt;body&gt;) <span class="meta-line">Files: <span class="files">QuestionPage.jsx</span> / route-focus hook · Effort: <span class="effort e-med">Med</span></span></label></li>
-        <li><input type="checkbox" id="h5"><label for="h5">Fix header logo link: it's a plain href="/" — full reload, bypasses the router basename, wipes formData <span class="meta-line">File: <span class="files">GovukHeader.jsx</span> · Effort: <span class="effort e-low">Low</span></span></label></li>
-        <li><input type="checkbox" id="h6"><label for="h6">QA pass: verify 320px reflow in dev tools + run one contrast checker (evidence for #11/#12) <span class="meta-line">No code · Effort: <span class="effort e-low">Low</span></span></label></li>
-      </ul>
 
       <!-- 3. ORDER -->
       <h2>3. Recommended implementation order</h2>
@@ -217,6 +276,9 @@
     (function () {
       var KEY = 'ghg-gap-analysis';
       var boxes = Array.prototype.slice.call(document.querySelectorAll('input[type="checkbox"]'));
+      // Progress tracks only the "Merged / done" boxes, not the pre-checked
+      // "PR pushed" status boxes.
+      var doneBoxes = boxes.filter(function (b) { return b.getAttribute('data-track') === 'done'; });
       var saved = {};
       try { saved = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) { saved = {}; }
 
@@ -230,21 +292,24 @@
         if (li) li.classList.toggle('done', b.checked);
       }
       function updateProgress() {
-        var done = boxes.filter(function (b) { return b.checked; }).length;
-        var total = boxes.length;
+        var done = doneBoxes.filter(function (b) { return b.checked; }).length;
+        var total = doneBoxes.length;
         document.getElementById('progress-text').textContent = done + ' of ' + total + ' done';
         document.getElementById('progress-fill').style.width = total ? (done / total * 100) + '%' : '0';
       }
 
       boxes.forEach(function (b) {
-        if (saved[b.id]) b.checked = true;
+        // Respect a saved value if present (so a "pushed" box can be un-ticked
+        // and stay un-ticked); otherwise keep the HTML default.
+        if (b.id in saved) b.checked = saved[b.id];
         paintRow(b);
         b.addEventListener('change', function () { paintRow(b); save(); updateProgress(); });
       });
       updateProgress();
 
       document.getElementById('reset-btn').addEventListener('click', function () {
-        boxes.forEach(function (b) { b.checked = false; paintRow(b); });
+        // Only clear the "Merged / done" boxes; leave the "PR pushed" status as is.
+        doneBoxes.forEach(function (b) { b.checked = false; paintRow(b); });
         save(); updateProgress();
       });
     })();
