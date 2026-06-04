@@ -34,3 +34,18 @@ export async function completeJourney(page) {
   }
   await expect(page).toHaveURL(/\/check-answers$/);
 }
+
+// Walk Start -> all five questions with custom answers -> /result.
+// answers: array of five visible radio labels in journey order
+// (propertyType, ownership, income, insulation, heating).
+export async function completeJourneyWith(page, answers) {
+  await gotoStart(page);
+  await page.getByRole('button', { name: 'Start now' }).click();
+  for (let i = 0; i < JOURNEY.length; i++) {
+    await expect(page).toHaveURL(new RegExp(`${JOURNEY[i].route}$`));
+    await answerQuestion(page, answers[i]);
+  }
+  await expect(page).toHaveURL(/\/check-answers$/);
+  await page.getByRole('button', { name: 'Accept and continue' }).click();
+  await expect(page).toHaveURL(/\/result$/);
+}

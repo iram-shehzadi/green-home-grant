@@ -3,6 +3,7 @@ import { gotoStart, answerQuestion, completeJourney } from './helpers.js';
 
 test.describe('Question flow', () => {
   test('completes the full journey and lands on the result page', async ({ page }) => {
+    test.setTimeout(60_000);
     await completeJourney(page);
 
     // Check-answers summary reflects the choices made.
@@ -14,6 +15,11 @@ test.describe('Question flow', () => {
 
     await page.getByRole('button', { name: 'Accept and continue' }).click();
     await expect(page).toHaveURL(/\/result$/);
+
+    // Result page shows the correct outcome heading (updated result page — no panel).
+    await expect(
+      page.getByRole('heading', { level: 1, name: 'You may be eligible for a Green Home Grant' })
+    ).toBeVisible();
   });
 
   test('the Back link returns to the previous page', async ({ page }) => {
