@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import GovukHeader from './components/GovukHeader';
 import GovukFooter from './components/GovukFooter';
-// TODO: Mount PhaseBanner below GovukHeader — import PhaseBanner from './components/PhaseBanner';
+import PhaseBanner from './components/PhaseBanner';
 import StartPage from './pages/StartPage';
 import PropertyTypePage from './pages/PropertyTypePage';
 import OwnershipPage from './pages/OwnershipPage';
@@ -30,8 +30,8 @@ function App() {
   return (
     <>
       <GovukHeader />
-      {/* TODO: Add <PhaseBanner phase="alpha" feedbackHref="#" /> here */}
       <div className="govuk-width-container">
+        <PhaseBanner phase="alpha" feedbackHref="#" />
         <main className="govuk-main-wrapper" role="main">
           <Routes>
             <Route path="/" element={<StartPage />} />
@@ -65,8 +65,14 @@ function App() {
                 <HeatingPage formData={formData} updateField={updateField} />
               }
             />
-            <Route path="/check-answers" element={<CheckAnswersPage />} />
-            <Route path="/result" element={<ResultPage />} />
+            <Route
+              path="/check-answers"
+              element={<CheckAnswersPage formData={formData} />}
+            />
+            <Route
+              path="/result"
+              element={<ResultPage formData={formData} updateField={updateField} />}
+            />
             <Route path="/accessibility-statement" element={<AccessibilityStatementPage />} />
           </Routes>
         </main>
