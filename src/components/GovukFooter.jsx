@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 export default function GovukFooter() {
   return (
     <footer className="govuk-footer">
@@ -7,9 +9,11 @@ export default function GovukFooter() {
             <h2 className="govuk-visually-hidden">Support links</h2>
             <ul className="govuk-footer__inline-list">
               <li className="govuk-footer__inline-list-item">
-                <a className="govuk-footer__link" href="/accessibility-statement">
+                {/* Router Link, not a plain <a href>: the bare href bypassed the
+                    router basename (the /proxy/<port> prefix) and 404'd. */}
+                <Link className="govuk-footer__link" to="/accessibility-statement">
                   Accessibility statement
-                </a>
+                </Link>
               </li>
             </ul>
 
