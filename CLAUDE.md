@@ -64,8 +64,10 @@ The component already implements the validation/error pattern below — don't re
 - **Radios** (`components/radios`): container is `govuk-radios` with `data-module="govuk-radios"`.
 - **Check answers** (`check-answers`): `govuk-summary-list` with a "Change" link per row
   (visually-hidden text naming the field); final button "Accept and continue".
-- **Result**: clear outcome — eligible → green `govuk-panel`; partial/not-eligible stated
-  plainly with the reason and what to do next. Never colour alone.
+- **Result** (`check-a-service-is-suitable`): show every outcome (eligible / partial /
+  not-eligible) as a plain page `<h1>` (`govuk-heading-xl`) + body, with the reason and what
+  to do next. Do NOT use the confirmation `govuk-panel` — it is only for completed
+  transactions, and GOV.UK Frontend has no negative/grey panel variant. Never colour alone.
 
 ## Validation & error pattern (already in QuestionPage)
 On a missing answer: prefix `<title>` with `Error: `, show the **error summary**

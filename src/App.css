@@ -405,10 +405,6 @@ a:focus {
   margin-bottom: var(--govuk-spacing-6);
 }
 
-.govuk-panel--not-eligible {
-  background: var(--govuk-dark-grey);
-}
-
 .govuk-panel__title {
   font-size: 48px;
   font-weight: 700;
@@ -456,6 +452,10 @@ a:focus {
   margin-top: 0;
   margin-bottom: var(--govuk-spacing-4);
   padding-left: 20px;
+}
+
+.govuk-list--bullet {
+  list-style-type: disc;
 }
 
 /* Fieldset */
